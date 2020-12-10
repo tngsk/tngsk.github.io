@@ -28,18 +28,18 @@ const study = lab.util.fromObject({
       "items": [
         {
           "type": "text",
-          "title": "もっとも大きなデータを探す",
-          "content": "5つの数字か5本の棒グラフが表示されます。もっとも大きいデータ要素をクリックしてください。"
+          "title": "もっとも大きなデータ要素を探す実験",
+          "content": "本日は実験にご協力いただきありがとうございます！\n\n\u003Cbr\u003E\u003Cbr\u003E実験では、画面中央に横に並んだ「5つの数字」か「5本の棒グラフ」が表示されます。\nその中でもっとも大きいデータ要素（最も値の大きな数値か棒）をクリックしてください。\n\u003Cbr\u003E（タッチパネル液晶をお使いの場合は指タップでも実験可能ですが、画面の小さいスマホは使わないでください）\n\n\u003Cbr\u003E\u003Cbr\u003E選択はなるべく速く、そしてなるべく正確に行ってください。\n\n\u003Cbr\u003E\u003Cbr\u003E毎回、判断していただく画面に先立ち、画面の中央に「＋」、\n下の方に「クリックしてスタート」という文字がある画面が提示されます。\n\n\u003Cbr\u003E\u003Cbr\u003E毎回必ず「＋」に視線を置いた上、「クリックしてスタート」を\n押して実験を始めてください。指タップでももちろん可能です。\n\u003Cbr\u003E（マウスボタン（指）の押し下げではなく、離したとき（mouse-up）に実験が始まります。\nですので、マウスを押し下げた上で「＋」に視線を合わせてからマウスボタンを\n離して実験を始めるとスムーズです）\n\n\u003Cbr\u003E\u003Cbr\u003E判断いただく数字やグラフは全部で20組となります。すぐ終わると思います。\n\n\u003Cbr\u003E\u003Cbr\u003Eそれでは準備ができたら右下の「実験始める→」をクリックして実験を始めてください。\n\u003Cbr\u003Eよろしくお願いします！"
         }
       ],
       "scrollTop": true,
-      "submitButtonText": "Continue →",
+      "submitButtonText": "実験を始める →",
       "submitButtonPosition": "right",
       "files": {},
       "responses": {},
       "parameters": {},
       "messageHandlers": {},
-      "title": "Opening"
+      "title": "教示"
     },
     {
       "type": "lab.flow.Loop",
@@ -53,7 +53,8 @@ const study = lab.util.fromObject({
           "max": "41",
           "mean": "32.4",
           "std": "7.002856560004639",
-          "img": "none.png"
+          "img": "none.png",
+          "correct": "2"
         },
         {
           "num1": "95",
@@ -64,7 +65,8 @@ const study = lab.util.fromObject({
           "max": "104",
           "mean": "92.2",
           "std": "8.158431221748456",
-          "img": "none.png"
+          "img": "none.png",
+          "correct": "3"
         },
         {
           "num1": "93",
@@ -75,7 +77,8 @@ const study = lab.util.fromObject({
           "max": "93",
           "mean": "86.0",
           "std": "7.0710678118654755",
-          "img": "none.png"
+          "img": "none.png",
+          "correct": "1"
         },
         {
           "num1": "56",
@@ -86,7 +89,8 @@ const study = lab.util.fromObject({
           "max": "75",
           "mean": "45.6",
           "std": "18.11739495622922",
-          "img": "none.png"
+          "img": "none.png",
+          "correct": "4"
         },
         {
           "num1": "24",
@@ -97,7 +101,8 @@ const study = lab.util.fromObject({
           "max": "58",
           "mean": "42.2",
           "std": "12.464349160706305",
-          "img": "none.png"
+          "img": "none.png",
+          "correct": "2"
         },
         {
           "num1": "17",
@@ -108,7 +113,8 @@ const study = lab.util.fromObject({
           "max": "35",
           "mean": "19.6",
           "std": "11.689311356961968",
-          "img": "none.png"
+          "img": "none.png",
+          "correct": "5"
         },
         {
           "num1": "72",
@@ -119,7 +125,8 @@ const study = lab.util.fromObject({
           "max": "76",
           "mean": "63.6",
           "std": "10.556514576317317",
-          "img": "none.png"
+          "img": "none.png",
+          "correct": "2"
         },
         {
           "num1": "79",
@@ -130,7 +137,8 @@ const study = lab.util.fromObject({
           "max": "85",
           "mean": "77.6",
           "std": "4.2708313008125245",
-          "img": "none.png"
+          "img": "none.png",
+          "correct": "3"
         },
         {
           "num1": "13",
@@ -141,7 +149,8 @@ const study = lab.util.fromObject({
           "max": "25",
           "mean": "10.0",
           "std": "8.366600265340756",
-          "img": "none.png"
+          "img": "none.png",
+          "correct": "3"
         },
         {
           "num1": "71",
@@ -152,7 +161,8 @@ const study = lab.util.fromObject({
           "max": "73",
           "mean": "64.2",
           "std": "8.44748483277715",
-          "img": "none.png"
+          "img": "none.png",
+          "correct": "3"
         },
         {
           "num1": "",
@@ -163,7 +173,8 @@ const study = lab.util.fromObject({
           "max": "41",
           "mean": "32.4",
           "std": "7.002856560004639",
-          "img": "0.png"
+          "img": "0.png",
+          "correct": "2"
         },
         {
           "num1": "",
@@ -174,7 +185,8 @@ const study = lab.util.fromObject({
           "max": "104",
           "mean": "92.2",
           "std": "8.158431221748456",
-          "img": "1.png"
+          "img": "1.png",
+          "correct": "3"
         },
         {
           "num1": "",
@@ -185,7 +197,8 @@ const study = lab.util.fromObject({
           "max": "93",
           "mean": "86.0",
           "std": "7.0710678118654755",
-          "img": "2.png"
+          "img": "2.png",
+          "correct": "1"
         },
         {
           "num1": "",
@@ -196,7 +209,8 @@ const study = lab.util.fromObject({
           "max": "75",
           "mean": "45.6",
           "std": "18.11739495622922",
-          "img": "3.png"
+          "img": "3.png",
+          "correct": "4"
         },
         {
           "num1": "",
@@ -207,7 +221,8 @@ const study = lab.util.fromObject({
           "max": "58",
           "mean": "42.2",
           "std": "12.464349160706305",
-          "img": "4.png"
+          "img": "4.png",
+          "correct": "2"
         },
         {
           "num1": "",
@@ -218,7 +233,8 @@ const study = lab.util.fromObject({
           "max": "35",
           "mean": "19.6",
           "std": "11.689311356961968",
-          "img": "5.png"
+          "img": "5.png",
+          "correct": "5"
         },
         {
           "num1": "",
@@ -229,7 +245,8 @@ const study = lab.util.fromObject({
           "max": "76",
           "mean": "63.6",
           "std": "10.556514576317317",
-          "img": "6.png"
+          "img": "6.png",
+          "correct": "2"
         },
         {
           "num1": "",
@@ -240,7 +257,8 @@ const study = lab.util.fromObject({
           "max": "85",
           "mean": "77.6",
           "std": "4.2708313008125245",
-          "img": "7.png"
+          "img": "7.png",
+          "correct": "3"
         },
         {
           "num1": "",
@@ -251,7 +269,8 @@ const study = lab.util.fromObject({
           "max": "25",
           "mean": "10.0",
           "std": "8.366600265340756",
-          "img": "8.png"
+          "img": "8.png",
+          "correct": "3"
         },
         {
           "num1": "",
@@ -262,7 +281,8 @@ const study = lab.util.fromObject({
           "max": "73",
           "mean": "64.2",
           "std": "8.44748483277715",
-          "img": "9.png"
+          "img": "9.png",
+          "correct": "3"
         }
       ],
       "sample": {
@@ -272,7 +292,7 @@ const study = lab.util.fromObject({
       "responses": {},
       "parameters": {},
       "messageHandlers": {},
-      "title": "Loop Number",
+      "title": "繰り返し（実験パラメータ）",
       "shuffleGroups": [],
       "template": {
         "type": "lab.flow.Sequence",
@@ -280,7 +300,7 @@ const study = lab.util.fromObject({
         "responses": {},
         "parameters": {},
         "messageHandlers": {},
-        "title": "Seq Number",
+        "title": "試行",
         "content": [
           {
             "type": "lab.canvas.Screen",
@@ -351,22 +371,23 @@ const study = lab.util.fromObject({
             "content": [
               {
                 "type": "image",
-                "left": 0,
-                "top": -200,
+                "left": -25,
+                "top": 300,
                 "angle": 0,
-                "width": 501.11999999999995,
-                "height": 334.08,
+                "width": 540,
+                "height": 331.2,
                 "stroke": null,
                 "strokeWidth": 0,
                 "fill": "black",
-                "src": "${ this.files[parameters.img] }"
+                "src": "${ this.files[parameters.img] }",
+                "autoScale": undefined
               },
               {
                 "type": "i-text",
                 "left": -200,
                 "top": 0,
                 "angle": 0,
-                "width": 344.54,
+                "width": 307.73,
                 "height": 36.16,
                 "stroke": null,
                 "strokeWidth": 1,
@@ -382,10 +403,10 @@ const study = lab.util.fromObject({
               {
                 "type": "aoi",
                 "left": -200,
-                "top": -63.25,
+                "top": -107.9,
                 "angle": 0,
                 "width": 100,
-                "height": 225.25,
+                "height": 314.8,
                 "stroke": null,
                 "strokeWidth": 1,
                 "fill": "rgba(0, 0, 0, 0.2)",
@@ -394,10 +415,10 @@ const study = lab.util.fromObject({
               {
                 "type": "aoi",
                 "left": -100,
-                "top": -63.25,
+                "top": -108.4,
                 "angle": 0,
                 "width": 100,
-                "height": 225.25,
+                "height": 313.8,
                 "stroke": null,
                 "strokeWidth": 1,
                 "fill": "rgba(0, 0, 0, 0.2)",
@@ -406,10 +427,10 @@ const study = lab.util.fromObject({
               {
                 "type": "aoi",
                 "left": 0,
-                "top": -63.25,
+                "top": -108.06,
                 "angle": 0,
                 "width": 100,
-                "height": 225.25,
+                "height": 314.48,
                 "stroke": null,
                 "strokeWidth": 1,
                 "fill": "rgba(0, 0, 0, 0.2)",
@@ -418,10 +439,10 @@ const study = lab.util.fromObject({
               {
                 "type": "aoi",
                 "left": 100,
-                "top": -62.75,
+                "top": -107.56,
                 "angle": 0,
                 "width": 100,
-                "height": 224.26,
+                "height": 313.48,
                 "stroke": null,
                 "strokeWidth": 1,
                 "fill": "rgba(0, 0, 0, 0.2)",
@@ -430,10 +451,10 @@ const study = lab.util.fromObject({
               {
                 "type": "aoi",
                 "left": 200,
-                "top": -62.75,
+                "top": -107.56,
                 "angle": 0,
                 "width": 100,
-                "height": 224.26,
+                "height": 313.48,
                 "stroke": null,
                 "strokeWidth": 1,
                 "fill": "rgba(0, 0, 0, 0.2)",
@@ -444,7 +465,7 @@ const study = lab.util.fromObject({
                 "left": -100,
                 "top": 0,
                 "angle": 0,
-                "width": 344.54,
+                "width": 307.73,
                 "height": 36.16,
                 "stroke": null,
                 "strokeWidth": 1,
@@ -480,7 +501,7 @@ const study = lab.util.fromObject({
                 "left": 100,
                 "top": 0,
                 "angle": 0,
-                "width": 344.67,
+                "width": 307.73,
                 "height": 36.16,
                 "stroke": null,
                 "strokeWidth": 1,
@@ -498,7 +519,7 @@ const study = lab.util.fromObject({
                 "left": 200,
                 "top": 0,
                 "angle": 0,
-                "width": 344.54,
+                "width": 307.73,
                 "height": 36.16,
                 "stroke": null,
                 "strokeWidth": 1,
@@ -506,7 +527,7 @@ const study = lab.util.fromObject({
                 "text": "${ parameters.num5 }",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
-                "fontSize": 32,
+                "fontSize": "32",
                 "fontFamily": "sans-serif",
                 "lineHeight": 1.16,
                 "textAlign": "center"
@@ -530,16 +551,16 @@ const study = lab.util.fromObject({
               "none.png": "embedded\u002Ff6671819c0bf52f2845ecd5607840cb1d44907826282fdbf3fa15cb036429088.png"
             },
             "responses": {
-              "click @btnA": "${ parameters.num1 }",
-              "click @btnB": "${ parameters.num2 }",
-              "click @btnC": "${ parameters.num3 }",
-              "click @btnD": "${ parameters.num4 }",
-              "click @btnE": "${ parameters.num5 }"
+              "click @btnA": "1",
+              "click @btnB": "2",
+              "click @btnC": "3",
+              "click @btnD": "4",
+              "click @btnE": "5"
             },
             "parameters": {},
             "messageHandlers": {},
-            "title": "Stimulus Number",
-            "correctResponse": "${ parameters.max }"
+            "title": "Stimulus + responce",
+            "correctResponse": "${ parameters.correct }"
           }
         ]
       }
@@ -548,17 +569,19 @@ const study = lab.util.fromObject({
       "type": "lab.html.Page",
       "items": [
         {
-          "type": "text"
+          "type": "text",
+          "title": "お疲れ様でした！",
+          "content": "右下の「データダウンロードを始める」を押して、この画面の上部にあらわれる灰色の「Download data」ボタンを押してCSVファイルを保存してください。\n\n\u003Cbr\u003E\u003Cbr\u003Eデータは研究以外の目的には使用しません。またこのCSVファイルには個人が特定できるデータは含まれていません。実験にご協力いただきありがとうございました！"
         }
       ],
       "scrollTop": true,
-      "submitButtonText": "Continue →",
+      "submitButtonText": "データダウンロードを始める→",
       "submitButtonPosition": "right",
       "files": {},
       "responses": {},
       "parameters": {},
       "messageHandlers": {},
-      "title": "Ending"
+      "title": "データDL指示・御礼"
     }
   ]
 })
