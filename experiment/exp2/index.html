@@ -5,22 +5,23 @@
   <title>Experiment</title>
   <!-- viewport setup -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- lab.js and libraries -->
-  <script src="lib/lab.js" data-labjs-script="library"></script>
-  <script src="lib/lab.fallback.js" data-labjs-script="fallback"></script>
-  <link rel="stylesheet" href="lib/lab.css">
-  <!-- actual experiment code -->
-  <script defer src="study.js"></script>
+  <!-- lab.js library and experiment code -->
+  <!-- lab.js library code -->
+  <script src="lab.js/lab.js" data-labjs-script="library"></script>
+  <script src="lab.js/lab.fallback.js" data-labjs-script="fallback"></script>
+  <link rel="stylesheet" href="lab.js/lab.css">
+  <!-- study code and styles -->
+  <script src="study.js" defer="true"></script>
+  
 </head>
 <body>
-  <div class="container fullscreen frameless">
-    <main class="content-vertical-center content-horizontal-center" data-labjs-section="main">
+  <!-- If you'd rather have a container with a fixed width
+       and variable height, try removing the fullscreen class below -->
+  <div class="container fullscreen" data-labjs-section="main">
+    <main class="content-vertical-center content-horizontal-center">
       <div>
-        <img src="lib/loading.svg" alt="loading icon" style="padding: 1rem"><br>
-        <p>
-          <strong>Preparing experiment</strong><br>
-          <span class="text-muted">please wait a moment</span>
-        </p>
+        <h2>Loading Experiment</h2>
+        <p>The experiment is loading and should start in a few seconds</p>
       </div>
     </main>
   </div>

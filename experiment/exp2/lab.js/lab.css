@@ -51,9 +51,7 @@ body {
   min-width: var(--width-min-container);
   min-height: 8vh;
   min-height: var(--height-min-header-footer);
-  /* min-height: calc(100vh - 2*24px);
-  min-height: calc(100vh - 2*var(--padding-internal));
-  Use page-style layout by default */
+  /* Use page-style layout by default */
   margin: 24px auto;
   margin: var(--padding-internal) auto;
   width: 900px;
@@ -117,8 +115,8 @@ main {
 }
 .container.fullscreen main {
   /* Flex positioning */
-  -webkit-box-flex: 0;
-          flex: 0;
+  -webkit-box-flex: 1;
+          flex: 1;
 }
 
 /* Frameless layout */
