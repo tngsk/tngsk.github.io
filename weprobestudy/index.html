@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.48/Tone.min.js"
+        integrity="sha512-3LlND6BAlQrUwOEzwzV+qCt2nliLeVBgJcGVnd6CjSLYgdZdABF5TzXnDz1HbSaWCdGfUBEyB3/ZHiRyIvfq8Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+    <script>
+        const meter = new Tone.Meter();
+        const mic = new Tone.UserMedia().connect(meter);
+        mic.open().then(() => {
+            // promise resolves when input is available
+            console.log("mic open");
+            // print the incoming mic levels in decibels
+            setInterval(() => console.log(meter.getValue()), 100);
+        }).catch(e => {
+            // promise is rejected when the user doesn't have or allow mic access
+            console.log("mic not open");
+        });
+    </script>
+
+
+</body>
+
+</html>
