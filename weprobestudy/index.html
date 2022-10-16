@@ -12,21 +12,35 @@
 </head>
 
 <body>
+
     <script>
+
+    const rec = () => {
+
         const meter = new Tone.Meter();
         const mic = new Tone.UserMedia().connect(meter);
+
+        const cnsl = document.getElementById('console');
+        cnsl.supported = Tone.UserMedia.supported;
+
         mic.open().then(() => {
             // promise resolves when input is available
-            console.log("mic open");
+            // console.log("mic open");
+            cnsl.insertAdjacentHTML('beforeend', "mic open");
             // print the incoming mic levels in decibels
-            setInterval(() => console.log(meter.getValue()), 100);
+            setInterval(() => {
+                cnsl.insertAdjacentHTML('beforeend', meter.getValue())
+            }, 100);
         }).catch(e => {
             // promise is rejected when the user doesn't have or allow mic access
-            console.log("mic not open");
+            // console.log("mic not open");
+            cnsl.insertAdjacentHTML('beforeend', "mic not open");
         });
+    }
+
     </script>
-
-
+    <button onclick="rec()">ARM</button>
+    <div id="console"></div>
 </body>
 
 </html>
