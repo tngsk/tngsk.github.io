@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- <script src="https://unpkg.com/tone@14.7.77/build/Tone.js"></script> -->
-    <script src="./js/Tone.js"></script>
+    <script src="https://unpkg.com/tone@14.7.77/build/Tone.js"></script>
+    <!-- <script src="./js/Tone.js"></script> -->
 </head>
 
 <body>
@@ -16,10 +16,11 @@
 
     <div id="debug"></div>
 
-
     <script>
 
-
+        const debug = (text) => {
+            console.log(text)
+        }
 
         document.getElementById('mic').addEventListener('click', () => {
 
@@ -29,10 +30,10 @@
             const mic = new Tone.UserMedia().connect(meter)
 
             mic.open().then(() => {
-                console.log(mic.state)
-                console.log(mic.context)
+                debug(mic.state)
+                debug(mic.context)
                 setInterval(() => {
-                    console.log(meter.getValue())
+                    debug(meter.getValue())
                     // console.log(mic.state)
                 }, 100);
             }).catch(error => {
