@@ -20,6 +20,7 @@
     <script>
 
         let r = 0
+        let x = 0
 
         function setup() {
             createCanvas(300,300)
@@ -28,16 +29,21 @@
 
         function draw() {
 
-            background(0)
+            // background(0)
 
-            r = map(meter.getValue(), -99, 0, 0, 150, true)
+            r = map(meter.getValue(), -99, 0, 150, 0, true)
             if (r > 100) {
                 fill(255,0,0)
             } else {
                 fill(255)
             }
-
-            ellipse(width/2, height/2, r, r)
+            // ellipse(width/2, height/2, r, r)
+            point(x%width, r)
+            if (x%width == 0) {
+                x = 0
+                background(255)
+            }
+            x += 1
         }
 
         const debug = (text) => {
@@ -45,7 +51,9 @@
             document.getElementById('debug').innerText = text
         }
 
-        const meter = new Tone.Meter()
+        const meter = new Tone.Meter({
+                smoothing: 0.25
+            })
         const mic = new Tone.UserMedia().connect(meter)
 
         let timerID = 0
