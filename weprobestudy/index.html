@@ -54,7 +54,10 @@
         const meter = new Tone.Meter({
                 smoothing: 0.25
             })
-        const mic = new Tone.UserMedia().connect(meter)
+        const mic = new Tone.UserMedia({
+                volume: -12,
+                mute: false
+            }).connect(meter)
 
         let timerID = 0
 
@@ -69,7 +72,7 @@
 
             mic.open().then(() => {
                 timerID = setInterval(() => {
-                    // debug(meter.getValue())
+                    debug(meter.getValue())
                 }, 100);
             }).catch(error => {
 
