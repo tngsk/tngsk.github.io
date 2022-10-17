@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://unpkg.com/tone@14.7.77/build/Tone.js"></script>
+    <!-- <script src="https://unpkg.com/tone@14.7.77/build/Tone.js"></script> -->
+<script src="./js/Tone.js"></script>
 </head>
 
 <body>
@@ -18,55 +19,42 @@
 
     <script>
 
+
+
         document.getElementById('mic').addEventListener('click', () => {
 
-            const meter = new Tone.Meter()
-            const mic = new Tone.UserMedia().connect(meter)
+            Tone.start()
+            const context = new Tone.Context();
+            context.resume().then(() => {
+                console.log('Playback resumed successfully');
 
-            mic.open().then( () => {
+                const meter = new Tone.Meter()
+                const mic = new Tone.UserMedia()
 
-                console.log(mic.state)
+                mic.connect(meter)
 
-                setInterval(() => {
+                const promise = mic.open().then(() => {
+                    console.log(mic.state)
+                    console.log(mic.context)
+                    setInterval(() => {
+                        console.log(meter.getValue())
+                        // console.log(mic.state)
+                    }, 100);
+                }).catch(error => {
+                    console.error(error)
+                })
 
-                    console.log(meter.getValue())
-                }, 100);
-
-            }).catch( error => {
-                console.error(error)
-            })
-
+                if (promise !== undefined) {
+                    promise.then(_ => {
+                        console.log('promise started');
+                    }).catch(error => {
+                        console.log('promise prevented');
+                        // Autoplay was prevented.
+                        // Show a "Play" button so that user can start playback.
+                    })
+                };
+            });
         })
-
-        // const debug = document.getElementById('debug');
-        // // const micbutton = document.getElementById('mic-button');
-        // // micbutton.supprted = Tone.UserMedia.supprted
-
-        // const mic_open = () => {
-
-        //     const meter = new Tone.Meter();
-        //     const mic = new Tone.UserMedia().connect(meter);
-
-        //     mic.open().then(() => {
-        //         // promise resolves when input is available
-        //         console.log("mic open");
-        //         // cnsl.insertAdjacentHTML('beforeend', "mic open");
-        //         // print the incoming mic levels in decibels
-        //         setInterval(() => {
-        //             console.log(meter.getValue())
-        //         }, 100);
-
-        //     }).catch(e => {
-        //         // promise is rejected when the user doesn't have or allow mic access
-        //         console.log("mic not open");
-        //         // cnsl.insertAdjacentHTML('beforeend', "mic not open");
-        //     });
-
-        // }
-
-        // const mic_close = () => {
-        //     mic.close()
-        // }
 
     </script>
 </body>
