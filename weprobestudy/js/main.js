@@ -17,7 +17,17 @@ const wp_expid = jsPsych.randomization.randomID(5);
 /* create timeline */
 let timeline = [];
 
-// [Preload] -> [Welcome] -> [Instructions] -> [Fixation] -> [Stimulus]
+// [BrowserCheck] - [Preload] -> [Welcome] -> [Instructions] -> [Fixation] -> [Stimulus]
+
+
+// Browser Check
+const browsercheck = {
+  type: jsPsychBrowserCheck,
+  data: {
+    task:"browsercheck"
+  }
+};
+timeline.push(browsercheck);
 
 /* preload assets */
 const wp_image_path = 'stimulus/'
@@ -36,8 +46,9 @@ timeline.push(preload);
 
 /* define welcome message trial */
 const welcome = {
-  type: jsPsychHtmlKeyboardResponse,
+  type: jsPsychHtmlButtonResponse,
   stimulus: "Welcome to the experiment. Press any key to begin.",
+  choices: ["->"],
   data: {
     task: "welcome",
   },
@@ -61,8 +72,9 @@ let instructions_content = `
       `;
 
 const instructions = {
-  type: jsPsychHtmlKeyboardResponse,
+  type: jsPsychHtmlButtonResponse,
   stimulus: instructions_content,
+  choices: ["->"],
   data: {
     task: "instructions",
   },
@@ -75,8 +87,8 @@ timeline.push(instructions);
 const audio_calibration_start = {
   type: jsPsychHtmlButtonResponse,
   stimulus:
-    "本実験は音が鳴ります。端末本体の音量ボリュームを小さめに設定して、[次へ] ボタンを押してください。",
-  choices: ["次へ"],
+    "本実験は音が鳴ります。端末本体の音量ボリュームを小さめに設定して、[->] ボタンを押してください。",
+  choices: ["->"],
   data: {
     task: "audio_calibration",
   },
@@ -90,9 +102,9 @@ const audio_calibration_volume = {
   stimulus: () => {
     Tone.Transport.start();
     calibration_freq.start();
-    return "端末本体の音量ボリュームを調整して、メロディが快適に聞こえる音量にしてください。終わったら[次へ] ボタンを押してください。";
+    return "端末本体の音量ボリュームを調整して、メロディが快適に聞こえる音量にしてください。終わったら[->] ボタンを押してください。";
   },
-  choices: ["次へ"],
+  choices: ["->"],
   data: {
     task: "audio_calibration",
   },
@@ -105,43 +117,46 @@ const audio_calibration_volume = {
 let timerID = 0;
 const audio_calibration_mic = {
   type: jsPsychHtmlButtonResponse,
-  stimulus: () => {
-
+  data: {
+    task: "audio_calibration",
+  },
+  on_start: (trial) => {
+    trial.data.timer = 0
+    console.log(trial.data)
+  },
+  stimulus: (data) => {
     // Tone.Transport.start();
     // calibration_freq.start();
-    synth.triggerAttack(500)
+    synth.triggerAttack(500);
 
     audio_mic
       .open()
       .then(() => {
-        timerID = setInterval(() => {
+        data.timer = setInterval(() => {
           let levelmeter = document.getElementById("levelmeter");
           if (levelmeter) {
-            levelmeter.setAttribute('value', audio_meter.getValue())
+            levelmeter.setAttribute("value", audio_meter.getValue());
           } else {
-            console.log(levelmeter)
+            // console.log(levelmeter);
           }
-          console.log(audio_meter.getValue());
+          // console.log(audio_meter.getValue());
         }, 100);
+        console.log(data.timer);
       })
       .catch((error) => {});
 
-    return "端末本体の音量ボリュームを操作して、メーターが黄色になるように音量を調整してください。<meter id='levelmeter'  min='-96' low='-34' optium='-30' high='-28' max='0' value='-96'></meter>";
+    return "端末本体の音量ボリュームを操作して、メーターが黄色になるように音量を調整してください。<meter id='levelmeter' min='-96' low='-34' optium='-30' high='-28' max='0' value='-96'></meter>";
   },
-  choices: ["次へ"],
-  data: {
-    task: "audio_calibration",
-  },
+  choices: ["->"],
+
   on_finish: (data) => {
-
     data.calibration = audio_meter.getValue();
-
+    console.log(data.timer)
     // Tone.Transport.stop();
     // calibration_freq.stop();
     synth.triggerRelease();
-    clearInterval(timerID);
+    clearInterval(data.timer);
     audio_mic.close();
-
   },
 };
 
@@ -171,8 +186,8 @@ const stimulus_list = [
   { stimulus: preload_images[1], correct_response: "j" },
 ];
 
-const test = {
-  type: jsPsychImageKeyboardResponse,
+const trial = {
+  type: jsPsychImageButtonResponse,
   stimulus: jsPsych.timelineVariable("stimulus"),
   choices: ["f", "j"],
   data: {
@@ -180,6 +195,7 @@ const test = {
     correct_response: jsPsych.timelineVariable("correct_response"),
   },
   on_finish: (data) => {
+    data.response = ["f", "j"][data.response];
     data.correct = jsPsych.pluginAPI.compareKeys(
       data.response,
       data.correct_response
@@ -187,18 +203,19 @@ const test = {
   },
 };
 
-/* define test procedure */
-const test_procedure = {
-  timeline: [fixation, test],
+/* define trial procedure */
+const trial_procedure = {
+  timeline: [fixation, trial],
   timeline_variables: stimulus_list,
   repetitions: 2,
   randomize_order: true,
 };
-timeline.push(test_procedure);
+timeline.push(trial_procedure);
 
 /* debriefing */
 const debriefing = {
-  type: jsPsychHtmlKeyboardResponse,
+  type: jsPsychHtmlButtonResponse,
+  choices:["->"],
   data: {
     task: "debriefing",
   },
