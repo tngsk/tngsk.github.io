@@ -42,7 +42,7 @@ const audio_meter = new Tone.Meter({
   smoothing: 0.95,
 });
 const audio_mic = new Tone.UserMedia({
-  volume: -24,
+  volume: -48,
   mute: false,
 }).connect(audio_meter);
 
