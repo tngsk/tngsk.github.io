@@ -139,14 +139,14 @@ const audio_calibration_mic = {
           } else {
             // console.log(levelmeter);
           }
-          document.getElementById("debug").innerHTML = audio_meter.getValue();
+          document.getElementById("console").innerText = audio_meter.getValue();
 
         }, 100);
         console.log(data.timer);
       })
       .catch((error) => {});
 
-    return "端末本体の音量ボリュームを操作して、メーターが黄色になるように音量を調整してください。<meter id='levelmeter' min='-96' low='-34' optium='-30' high='-28' max='0' value='-96'></meter>";
+    return "端末本体の音量ボリュームを操作して、メーターが黄色になるように音量を調整してください。<meter id='levelmeter' min='-96' low='-34' optium='-30' high='-28' max='0' value='-96'></meter><div id='console'></div>";
   },
   choices: ["->"],
 
