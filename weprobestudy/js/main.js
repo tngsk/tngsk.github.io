@@ -84,6 +84,15 @@ timeline.push(instructions);
 
 // 音量のキャリブレーション
 
+const initMicrophone = {
+  type: jsPsychInitializeMicrophone,
+  device_select_message:
+    "<p>Please select the microphone you would like to use.</p>",
+  button_label: "Use this microphone.",
+};
+
+timeline.push(initMicrophone);
+
 const audio_calibration_start = {
   type: jsPsychHtmlButtonResponse,
   stimulus:
