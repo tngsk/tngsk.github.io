@@ -24,7 +24,7 @@ let timeline = [];
 const browsercheck = {
   type: jsPsychBrowserCheck,
   data: {
-    task:"browsercheck"
+    task:"browser-check"
   }
 };
 timeline.push(browsercheck);
@@ -139,7 +139,8 @@ const audio_calibration_mic = {
           } else {
             // console.log(levelmeter);
           }
-          // console.log(audio_meter.getValue());
+          document.getElementById("debug").innerText = audio_meter.getValue();
+
         }, 100);
         console.log(data.timer);
       })
