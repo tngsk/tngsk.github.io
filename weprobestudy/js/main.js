@@ -139,7 +139,7 @@ const audio_calibration_mic = {
           } else {
             // console.log(levelmeter);
           }
-          document.getElementById("debug").innerText = audio_meter.getValue();
+          document.getElementById("debug").innerHTML = audio_meter.getValue();
 
         }, 100);
         console.log(data.timer);
