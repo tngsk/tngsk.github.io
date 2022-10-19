@@ -39,10 +39,10 @@ const calibration_freq = new Tone.Sequence(
 ); //.start()
 
 const audio_meter = new Tone.Meter({
-  smoothing: 0.95,
+  smoothing: 0.9,
 });
 const audio_mic = new Tone.UserMedia({
-  volume: -48,
+  volume: -12,
   mute: false,
 }).connect(audio_meter);
 

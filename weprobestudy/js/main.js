@@ -84,14 +84,16 @@ timeline.push(instructions);
 
 // 音量のキャリブレーション
 
+/*
+// TODO: プラグインを使う場合、音量レベルは独自で取得する方法に変更になる
 const initMicrophone = {
   type: jsPsychInitializeMicrophone,
   device_select_message:
     "<p>Please select the microphone you would like to use.</p>",
   button_label: "Use this microphone.",
 };
-
 timeline.push(initMicrophone);
+*/
 
 const audio_calibration_start = {
   type: jsPsychHtmlButtonResponse,
@@ -169,7 +171,6 @@ const audio_calibration_mic = {
     audio_mic.close();
   },
 };
-
 
 const audio_calibration_procedure = {
   timeline: [audio_calibration_start, audio_calibration_mic]
