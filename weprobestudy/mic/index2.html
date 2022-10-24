@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UserMedia - Mic</title>
+    <!-- <script src="https://unpkg.com/tone@14.7.77/build/Tone.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.js"></script>
+</head>
+
+<body>
+
+    <canvas id="canvas"></canvas>
+    <button id="start">start</button>
+    <button id="stop">stop</button>
+    <button id="capture">capture</button>
+    <div id="captureValue"></div>
+    <div id="debug"></div>
+
+    <script>
+        let r = 0
+        let x = 0
+        let mic_level = 0
+
+        function setup() {
+            createCanvas(300, 300)
+            frameRate(15)
+        }
+
+        function draw() {
+
+            // background(0)
+
+            r = map(mic_level, -99, 0, 150, 0, true)
+            if (r > 100) {
+                fill(255, 0, 0)
+            } else {
+                fill(255)
+            }
+            // ellipse(width/2, height/2, r, r)
+            point(x % width, r)
+            if (x % width == 0) {
+                x = 0
+                background(255)
+            }
+            x += 1
+        }
+
+        /// ----------
+
+        let timerID = 0
+
+        let clicked = false
+
+        const gainToDb = (gain) => {
+            return 20 * (Math.log(gain) / Math.LN10);
+        }
+
+        document.getElementById('start').addEventListener('click', async () => {
+
+            if (clicked) return;
+            clicked = true;
+            // remove clickable element
+
+            const audioCtx = new AudioContext();
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+
+            // 停止する処理
+            document.getElementById('stop').addEventListener('click', () => {
+                clearInterval(timerID);
+                stream.getTracks().forEach(track => track.stop());
+            })
+
+            const input = audioCtx.createMediaStreamSource(stream);
+            const analyzer = audioCtx.createAnalyser();
+            input.connect(analyzer);
+
+            // 波形データを保存する配列
+            const timeDomainArray = new Float32Array(analyzer.fftSize);
+
+            let _rms = 1.0
+            timerID = setInterval(() => {
+                // 入力データを取得
+                analyzer.getFloatTimeDomainData(timeDomainArray);
+                const totalSquared = timeDomainArray.reduce((total, current) => total + current * current, 0);
+                const rms = Math.sqrt(totalSquared / timeDomainArray.length);
+                const smoothing = 0.2;
+                _rms = Math.max(rms, _rms * smoothing);
+                mic_level = gainToDb(_rms)
+
+            }, 100);
+
+        })
+
+
+        document.getElementById('capture').addEventListener('click', () => {
+            // document.getElementById('captureValue').innerText = meter.getValue()
+        })
+
+    </script>
+</body>
+
+</html>

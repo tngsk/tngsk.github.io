@@ -55,8 +55,9 @@
         }
 
         const meter = new Tone.Meter({
-            smoothing: 0.8
-        }).toDestination();
+            smoothing: 0.8,
+            mute:true
+        })
 
         const mic = new Tone.UserMedia({
             volume: -12,
@@ -68,16 +69,17 @@
         document.getElementById('stop').addEventListener('click', () => {
             clearInterval(timerID);
             mic.close();
-            Tone.Destination.mute = false;
         })
 
         document.getElementById('start').addEventListener('click', () => {
             Tone.start()
-            Tone.Destination.mute = true;
+            // Tone.Destination.mute = true;
             mic.open().then(() => {
                 timerID = setInterval(() => {
-                    debug(meter.getValue())
+                    // debug(meter.getValue())
+                    debug(`mic:${mic.state}`)
                 }, 100);
+                debug(mic.deviceId);
             }).catch(error => {
                 debug('timer error');
             })
