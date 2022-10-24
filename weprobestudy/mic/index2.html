@@ -71,6 +71,7 @@
             document.getElementById('stop').addEventListener('click', () => {
                 clearInterval(timerID);
                 stream.getTracks().forEach(track => track.stop());
+                clicked = false;
             })
 
             const input = audioCtx.createMediaStreamSource(stream);
@@ -80,7 +81,7 @@
             // 波形データを保存する配列
             const timeDomainArray = new Float32Array(analyzer.fftSize);
 
-            let _rms = 1.0
+            let _rms = 0
             timerID = setInterval(() => {
                 // 入力データを取得
                 analyzer.getFloatTimeDomainData(timeDomainArray);
