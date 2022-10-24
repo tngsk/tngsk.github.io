@@ -43,7 +43,8 @@ const WPStaircase = {
   direction: "Down",
   lastDirection: "Down",
   trialCount: 0,
-  init: (startLevel) => {
+  tag: "",
+  init: () => {
     WPStaircase.level = 1.0;
     WPStaircase.mappedLevel = 0;
     WPStaircase.mappedMin = 0;
@@ -59,6 +60,9 @@ const WPStaircase = {
   setScale: (min, max) => {
     WPStaircase.mappedMin = min;
     WPStaircase.mappedMax = max;
+  },
+  setTag: (tag) => {
+    WPStaircase.tag = tag;
   },
   reset: () => {
     WPStaircase.positiveCount = 0;
