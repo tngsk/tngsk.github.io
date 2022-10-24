@@ -50,15 +50,16 @@
         }
 
         const debug = (text) => {
-            // console.log(text)
+            console.log(text)
             document.getElementById('debug').innerText = text
         }
 
         const meter = new Tone.Meter({
             smoothing: 0.8
-        })
+        }).toDestination();
+
         const mic = new Tone.UserMedia({
-            volume: -24,
+            volume: -12,
             mute: false
         }).connect(meter)
 
@@ -67,26 +68,24 @@
         document.getElementById('stop').addEventListener('click', () => {
             clearInterval(timerID);
             mic.close();
+            Tone.Destination.mute = false;
         })
 
         document.getElementById('start').addEventListener('click', () => {
             Tone.start()
+            Tone.Destination.mute = true;
             mic.open().then(() => {
                 timerID = setInterval(() => {
                     debug(meter.getValue())
                 }, 100);
             }).catch(error => {
-
+                debug('timer error');
             })
         })
 
         document.getElementById('capture').addEventListener('click', () => {
-            captureValue = meter.getValue()
+            document.getElementById('captureValue').innerText = meter.getValue()
         })
-
-        const captureUpdate = setInterval(() => {
-                document.getElementById('captureValue').innerText = captureValue
-            }, 500);
 
     </script>
 </body>
