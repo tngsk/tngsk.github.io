@@ -54,7 +54,7 @@
 
         let clicked = false
 
-        const gainToDb = (gain) => {
+        const atodb = (gain) => {
             return 20 * (Math.log(gain) / Math.LN10);
         }
 
@@ -89,7 +89,7 @@
                 const rms = Math.sqrt(totalSquared / timeDomainArray.length);
                 const smoothing = 0.2;
                 _rms = Math.max(rms, _rms * smoothing);
-                mic_level = gainToDb(_rms)
+                mic_level = atodb(_rms)
 
             }, 100);
 
