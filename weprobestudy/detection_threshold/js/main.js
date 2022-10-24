@@ -1,3 +1,4 @@
+const WPArraySum = (data) => data.reduce((x, y) => x + y, 0);
 
 /* jsPsych */
 const jsPsych = initJsPsych({
@@ -17,8 +18,24 @@ const jsPsych = initJsPsych({
 
 const wp_expid = jsPsych.randomization.randomID(5);
 
+// Staircase Procedure
+
+WPStaircase.init();
+WPStaircase.setScale(-96, -12)
+
+
+
+const a = [-27.70204803041736, -29.46915182468406, -32.88360244798875];
+console.log(arrayMean(a))
+
+
+
+
+
+
+
 /* create timeline */
-let timeline = [];
+// let timeline = [];
 
 // [BrowserCheck] - [Preload] -> [Welcome] -> [Instructions] -> [Fixation] -> [Stimulus]
 
@@ -26,17 +43,14 @@ let timeline = [];
 const browsercheck = {
   type: jsPsychBrowserCheck,
   data: {
-    task:"browser-check"
-  }
+    task: "browser-check",
+  },
 };
-timeline.push(browsercheck);
+// timeline.push(browsercheck);
 
 /* preload assets */
-const wp_image_path = 'stimulus/'
-const preload_images = [
-  wp_image_path + "blue.png",
-  wp_image_path + "orange.png"
-];
+const wp_image_path = "img/";
+const preload_images = [wp_image_path + "1.png", wp_image_path + "2.png"];
 const preload = {
   type: jsPsychPreload,
   images: preload_images,
@@ -44,7 +58,7 @@ const preload = {
     task: "preload",
   },
 };
-timeline.push(preload);
+// timeline.push(preload);
 
 /* define welcome message trial */
 const welcome = {
@@ -55,23 +69,10 @@ const welcome = {
     task: "welcome",
   },
 };
-timeline.push(welcome);
+// timeline.push(welcome);
 
 /* instructions */
-let instructions_content = `
-        <p>In this experiment, a circle will appear in the center
-        of the screen.</p><p>If the circle is <strong>blue</strong>,
-        press the letter F on the keyboard as fast as you can.</p>
-        <p>If the circle is <strong>orange</strong>, press the letter J
-        as fast as you can.</p>
-        <div style='width: 700px;'>
-        <div style='float: left;'><img src='${preload_images[0]}'></img>
-        <p class='small'><strong>Press the F key</strong></p></div>
-        <div style='float: right;'><img src='${preload_images[1]}'></img>
-        <p class='small'><strong>Press the J key</strong></p></div>
-        </div>
-        <p>Press any key to begin.</p>
-      `;
+let instructions_content = ``;
 
 const instructions = {
   type: jsPsychHtmlButtonResponse,
@@ -81,8 +82,7 @@ const instructions = {
     task: "instructions",
   },
 };
-timeline.push(instructions);
-
+// timeline.push(instructions);
 
 // 音量のキャリブレーション
 
@@ -133,10 +133,7 @@ const audio_calibration_mic = {
   data: {
     task: "audio_calibration",
   },
-  on_start: (trial) => {
-    trial.data.timer = 0
-    console.log(trial.data)
-  },
+  on_start: (trial) => {},
   stimulus: (data) => {
     // Tone.Transport.start();
     // calibration_freq.start();
@@ -145,7 +142,7 @@ const audio_calibration_mic = {
     audio_mic
       .open()
       .then(() => {
-        data.timer = setInterval(() => {
+        timerID = setInterval(() => {
           let levelmeter = document.getElementById("levelmeter");
           if (levelmeter) {
             levelmeter.setAttribute("value", audio_meter.getValue());
@@ -153,9 +150,7 @@ const audio_calibration_mic = {
             // console.log(levelmeter);
           }
           document.getElementById("console").innerText = audio_meter.getValue();
-
         }, 100);
-        console.log(data.timer);
       })
       .catch((error) => {});
 
@@ -165,25 +160,23 @@ const audio_calibration_mic = {
 
   on_finish: (data) => {
     data.calibration = audio_meter.getValue();
-    console.log(data.timer)
     // Tone.Transport.stop();
     // calibration_freq.stop();
     synth.triggerRelease();
-    clearInterval(data.timer);
+    clearInterval(timerID);
     audio_mic.close();
   },
 };
 
 const audio_calibration_procedure = {
-  timeline: [audio_calibration_start, audio_calibration_mic]
-}
+  timeline: [audio_calibration_start, audio_calibration_mic],
+};
 
-timeline.push(audio_calibration_procedure);
-
+// timeline.push(audio_calibration_procedure);
 
 /* define fixation and test trials */
 const fixation = {
-  type: jsPsychHtmlKeynoardResponse,
+  type: jsPsychHtmlKeyboardResponse,
   stimulus: '<div style="font-size:60px;">+</div>',
   choices: "NO_KEYS",
   trial_duration: 500,
@@ -192,43 +185,145 @@ const fixation = {
   },
 };
 
-// ----------------------------------------
-/* define trial stimuli array for timeline variables */
-const stimulus_list = [
-  { stimulus: preload_images[0], correct_response: "f" },
-  { stimulus: preload_images[1], correct_response: "j" },
-];
+//------------------------------------------------------------------
+// 強制選択法による実験デザイン
 
-const trial = {
-  type: jsPsychImageButtonResponse,
-  stimulus: jsPsych.timelineVariable("stimulus"),
-  choices: ["f", "j"],
+// Stimulus
+const stimuli = {
+  500: [
+    { stim: "first", freq: 500 },
+    { stim: "second", freq: 500 },
+  ],
+  2000: [
+    { stim: "first", freq: 2000 },
+    { stim: "second", freq: 2000 },
+  ],
+  4000: [
+    { stim: "first", freq: 4000 },
+    { stim: "second", freq: 4000 },
+  ],
+};
+
+const force_choice_first = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: () => {
+    const stim = jsPsych.timelineVariable("stim");
+    const freq = jsPsych.timelineVariable("freq");
+    if (stim == "first") {
+      const dB = WPStaircase.get();
+      play_signal(freq, dB);
+    }
+    return '<img src="img/1.png" />';
+  },
+  choices: "NO_KEYS",
+  trial_duration: 500,
+  post_trial_gap: 500,
+  data: {
+    task: "force_choice_first",
+  },
+};
+
+const force_choice_second = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: () => {
+    const stim = jsPsych.timelineVariable("stim");
+    const freq = jsPsych.timelineVariable("freq");
+    if (stim == "second") {
+      const dB = WPStaircase.get();
+      play_signal(freq, dB);
+    }
+    return '<img src="img/2.png" />';
+  },
+  choices: "NO_KEYS",
+  trial_duration: 500,
+  post_trial_gap: 500,
+  data: {
+    task: "force_choice_second",
+  },
+};
+
+const force_response = {
+  type: jsPsychHtmlButtonResponse,
+  stimulus: () => {
+    return "どちらに音がありましたか？";
+  },
+  choices: ["1", "2"],
+  button_html: '<img src="img/%choice%.png" style="width:50%;"/>',
+  post_trial_gap: 500,
   data: {
     task: "response",
-    correct_response: jsPsych.timelineVariable("correct_response"),
+    level: () => {
+      return WPStaircase.level;
+    },
+    dB: () => {
+      return WPStaircase.get()
+    },
+    condition: () => {
+      return jsPsych.timelineVariable("freq");
+    },
+    correct_response: () => {
+      return jsPsych.timelineVariable("stim");
+    },
   },
   on_finish: (data) => {
-    data.response = ["f", "j"][data.response];
+    data.response = ["first", "second"][data.response];
     data.correct = jsPsych.pluginAPI.compareKeys(
       data.response,
       data.correct_response
     );
+    last_trial_freq = data.signal_freq;
+    // staircase に反応を記録する
+    WPStaircase.addResponse(data.correct);
   },
 };
 
-/* define trial procedure */
-const trial_procedure = {
-  timeline: [fixation, trial],
-  timeline_variables: stimulus_list,
-  repetitions: 2,
-  randomize_order: true,
+// ------------------------------------------------------------------
+// ステップをリセットする
+
+const staircase_reset = {
+  type: jsPsychCallFunction,
+  func: () => {
+    WPStaircase.init();
+    return "";
+  },
+  data: {
+    task: "staircase_reset",
+  },
 };
-timeline.push(trial_procedure);
+
+// trial 1
+const trial_block_500 = {
+  timeline_variables: stimuli["500"],
+  timeline: [fixation, force_choice_first, force_choice_second, force_response],
+  sample: {
+    type: "fixed-repetitions", // random order
+    size: 1,
+  },
+};
+
+const staircase_loop = {
+  timeline: [trial_block_500],
+  loop_function: (data) => {
+    return WPStaircase.isLoop();
+  },
+};
+
+// ------------------------------------------------------------------
+// 信号レベル推定
+
+const estimation_level = {
+  type: jsPsychCallFunction,
+  func: () => WPStaircase.responses,
+  data: {
+    task: "estimation",
+    level: () => arrayMean(WPStaircase.responses)
+  },
+};
 
 /* debriefing */
 const debriefing = {
   type: jsPsychHtmlButtonResponse,
-  choices:["->"],
+  choices: ["->"],
   data: {
     task: "debriefing",
   },
@@ -245,7 +340,20 @@ const debriefing = {
           <p>Press any key to complete the experiment. Thank you!</p>`;
   },
 };
-timeline.push(debriefing);
+// timeline.push(debriefing);
 
 /* start the experiment */
-const startWeProbe = () => jsPsych.run(timeline);
+
+let timeline = [];
+
+// timeline.push(browsercheck);
+timeline.push(preload);
+// timeline.push(welcome);
+// timeline.push(instructions);
+timeline.push(audio_calibration_procedure);
+timeline.push(staircase_loop);
+timeline.push(estimation_level);
+
+timeline.push(debriefing);
+
+jsPsych.run(timeline);

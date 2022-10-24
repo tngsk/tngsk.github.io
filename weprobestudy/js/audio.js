@@ -19,6 +19,7 @@ synth.chain(fader1, Tone.Destination);
 
 // play funciton
 const play_signal = (freq, dB) => {
+  console.log(`play_signal: ${freq}, ${dB}`)
   fader1.volume.value = dB;
   synth.triggerAttackRelease(freq, 0.2);
 };

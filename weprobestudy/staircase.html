@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!-- weprobe template v0.1 -->
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/jspsych@7.2.3"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-browser-check@1.0.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.1"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.1.1"></script>
+    <!-- <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@1.1.1"></script> -->
+    <script src="https://unpkg.com/@jspsych/plugin-image-button-response@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-initialize-microphone@1.0.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-audio-response@1.0.2"></script>
+
+    <script src="https://unpkg.com/@jspsych/plugin-call-function@1.1.1"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.1"></script>
+    <link href="https://unpkg.com/jspsych@7.2.3/css/jspsych.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
+
+    <script src="https://unpkg.com/tone@14.7.77/build/Tone.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.js"></script>
+
+    <!-- <script src="./js/audio.js"></script> -->
+    <!-- <script src="./js/main.js"></script> -->
+</head>
+
+<body>
+    <div id="console"></div>
+    <div id="experiment_container"></div>
+    <script>
+
+        const staircase_startLevel = 100
+        const staircase = {
+            level: staircase_startLevel,
+            min: 1,
+            max: 100,
+            responses: [],
+            positiveCount: 0,
+            negativeCount: 0,
+            stepSize: 0.05,
+            flipCount: 0,
+            repeatCount: 0,
+            direction: 'Down',
+            lastDirection: 'Down',
+            trialCount: 0,
+            init: () => {
+                staircase.level = staircase_startLevel;
+                staircase.responses = [];
+                staircase.positiveCount = 0;
+                staircase.negativeCount = 0;
+                staircase.flipCount = 0;
+                staircase.direction = 'Down';
+                staircase.lastDirection = 'Down';
+                staircase.trialCount = 0;
+            },
+            reset: () => {
+                staircase.positiveCount = 0;
+                staircase.negativeCount = 0;
+            },
+            sum: (data) => {
+                return data.reduce((x, y) => x + y, 0)
+            },
+            addResponse: (response) => {
+
+                // 試行回数をカウント
+                staircase.trialCount += 1
+
+                // 反応を記録 : true(1) or false(0)
+                if (response) {
+                    staircase.positiveCount++
+                } else {
+                    staircase.negativeCount++
+                }
+
+                // 反転
+                if (staircase.direction != staircase.lastDirection) {
+                    staircase.lastDirection = staircase.direction
+                    staircase.flipCount++
+                    // 反転したときの数値を記録
+                    staircase.responses[staircase.flipCount - 1] = staircase.level
+                }
+
+                // 誤反応
+                if (staircase.negativeCount >= 1) {
+                    staircase.reset()
+                    staircase.level = staircase.level * (10.0 ** staircase.stepSize)
+                    if (staircase.level >= staircase.max) {
+                        staircase.level = staircase.max
+                    }
+                    staircase.direction = 'Up'
+                }
+
+                // 正反応
+                const condi = () => {
+                    let result = staircase.flipCount ? 3 : 1
+                    if (staircase.direction == 'Down') {
+                        result = 1
+                    }
+                    return result
+                }
+                if (staircase.positiveCount >= condi()) {
+                    staircase.reset()
+                    staircase.level = staircase.level / (10.0 ** staircase.stepSize)
+                    if (staircase.level <= staircase.min) {
+                        staircase.level = staircase.min
+                    }
+                    staircase.direction = 'Down'
+                }
+            },
+            isDone: () => {
+                // 終了条件：3回反転かつ指定回数繰り返し
+                if (staircase.flipCount >= 3 && staircase.trialCount >= staircase.repeatCount)  {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        // Main Block
+
+        document.addEventListener('keyup', (e) => {
+
+
+            switch (e.key) {
+                case 'ArrowRight':
+                    console.log('correct, currentLevel: ' + staircase.level)
+                    staircase.addResponse(1) // true
+
+                    break;
+                case 'ArrowLeft':
+                    console.log('wrong, currentLevel:  ' + staircase.level)
+                    staircase.addResponse(0) // false
+
+                    break;
+
+                default:
+                    break;
+            }
+
+            console.log(staircase.isDone())
+        })
+
+
+    </script>
+</body>
+
+</html>
