@@ -14,14 +14,14 @@ const synth = new Tone.Synth(ADSR);
 synth.oscillator.type = "sine";
 
 // Fader
-const fader1 = new Tone.Volume(-12);
+const fader1 = new Tone.Volume(0);
 
 // chain
 synth.chain(fader1, Tone.Destination);
 
 // play funciton
 const play_signal = (freq, dB) => {
-  console.log(`play_signal: ${freq}, ${dB}`)
+  // console.log(`play_signal: ${freq}, ${dB}`)
   fader1.volume.value = dB;
   synth.triggerAttackRelease(freq, 0.2);
 };
@@ -40,14 +40,6 @@ const calibration_freq = new Tone.Sequence(
   },
   [500, null]
 ); //.start()
-
-const audio_meter = new Tone.Meter({
-  smoothing: 0.9,
-});
-const audio_mic = new Tone.UserMedia({
-  volume: -12,
-  mute: false,
-}).connect(audio_meter);
 
 // Tone.Transport.start();
 // Tone.Transport.stop();
