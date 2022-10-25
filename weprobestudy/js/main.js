@@ -1,7 +1,6 @@
-
 /* jsPsych */
 const jsPsych = initJsPsych({
-  display_element: "experiment_container",
+  // display_element: "experiment_container",
   show_progress_bar: false,
   auto_update_progress_bar: false,
   default_iti: 500,
@@ -26,16 +25,16 @@ let timeline = [];
 const browsercheck = {
   type: jsPsychBrowserCheck,
   data: {
-    task:"browser-check"
-  }
+    task: "browser-check",
+  },
 };
 timeline.push(browsercheck);
 
 /* preload assets */
-const wp_image_path = 'stimulus/'
+const wp_image_path = "stimulus/";
 const preload_images = [
   wp_image_path + "blue.png",
-  wp_image_path + "orange.png"
+  wp_image_path + "orange.png",
 ];
 const preload = {
   type: jsPsychPreload,
@@ -83,19 +82,13 @@ const instructions = {
 };
 timeline.push(instructions);
 
-
 // 音量のキャリブレーション
 
-/*
-// TODO: プラグインを使う場合、音量レベルは独自で取得する方法に変更になる
-const initMicrophone = {
-  type: jsPsychInitializeMicrophone,
-  device_select_message:
-    "<p>Please select the microphone you would like to use.</p>",
-  button_label: "Use this microphone.",
-};
-timeline.push(initMicrophone);
-*/
+let stream;
+let analyzer;
+
+let timerID;
+let mic_level = 0;
 
 const audio_calibration_start = {
   type: jsPsychHtmlButtonResponse,
@@ -105,85 +98,60 @@ const audio_calibration_start = {
   data: {
     task: "audio_calibration",
   },
-  on_finish: () => {
-    Tone.start();
+  on_finish: async () => {
+    const audioCtx = new AudioContext();
+    stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const input = audioCtx.createMediaStreamSource(stream);
+    analyzer = audioCtx.createAnalyser();
+    input.connect(analyzer);
+    const timeDomainArray = new Float32Array(analyzer.fftSize);
+    let _rms = 0;
+    timerID = setInterval(() => {
+      // マイク入力をdBに変換する
+      analyzer.getFloatTimeDomainData(timeDomainArray);
+      const totalSquared = timeDomainArray.reduce(
+        (total, current) => total + current * current,0);
+      const rms = Math.sqrt(totalSquared / timeDomainArray.length);
+      _rms = Math.max(rms, _rms * 0.2); // smoothing = 0.2
+      mic_level = atodb(_rms);
+      // レベルメーターに反映
+      const levelmeter = document.getElementById("levelmeter");
+      if (levelmeter) {
+        levelmeter.setAttribute("value", mic_level)
+      }
+    }, 100);
   },
 };
 
-const audio_calibration_volume = {
-  type: jsPsychHtmlButtonResponse,
-  stimulus: () => {
-    Tone.Transport.start();
-    calibration_freq.start();
-    return "端末本体の音量ボリュームを調整して、メロディが快適に聞こえる音量にしてください。終わったら[->] ボタンを押してください。";
-  },
-  choices: ["->"],
-  data: {
-    task: "audio_calibration",
-  },
-  on_finish: () => {
-    calibration_freq.stop();
-    Tone.Transport.stop();
-  },
-};
 
-let timerID = 0;
 const audio_calibration_mic = {
   type: jsPsychHtmlButtonResponse,
   data: {
     task: "audio_calibration",
   },
-  on_start: (trial) => {
-    trial.data.timer = 0
-    console.log(trial.data)
-  },
-  stimulus: (data) => {
-    // Tone.Transport.start();
-    // calibration_freq.start();
+  stimulus: () => {
     synth.triggerAttack(500);
-
-    audio_mic
-      .open()
-      .then(() => {
-        data.timer = setInterval(() => {
-          let levelmeter = document.getElementById("levelmeter");
-          if (levelmeter) {
-            levelmeter.setAttribute("value", audio_meter.getValue());
-          } else {
-            // console.log(levelmeter);
-          }
-          document.getElementById("console").innerText = audio_meter.getValue();
-
-        }, 100);
-        console.log(data.timer);
-      })
-      .catch((error) => {});
-
-    return "端末本体の音量ボリュームを操作して、メーターが黄色になるように音量を調整してください。<meter id='levelmeter' min='-96' low='-34' optium='-30' high='-28' max='0' value='-96'></meter><div id='console'></div>";
+    return "端末本体の音量ボリュームを操作して、メーターが黄色になるように音量を調整してください。<br /><meter id='levelmeter' min='-96' low='-34' optium='-30' high='-28' max='0' value='-96'></meter><div id='console'></div>";
   },
   choices: ["->"],
-
   on_finish: (data) => {
-    data.calibration = audio_meter.getValue();
-    console.log(data.timer)
-    // Tone.Transport.stop();
-    // calibration_freq.stop();
+    clearInterval(timerID);
+    data.mic_level = mic_level;
+
     synth.triggerRelease();
-    clearInterval(data.timer);
-    audio_mic.close();
+    stream.getTracks().forEach((track) => track.stop());
   },
 };
 
 const audio_calibration_procedure = {
-  timeline: [audio_calibration_start, audio_calibration_mic]
-}
+  timeline: [audio_calibration_start, audio_calibration_mic],
+};
 
 timeline.push(audio_calibration_procedure);
 
-
 /* define fixation and test trials */
 const fixation = {
-  type: jsPsychHtmlKeynoardResponse,
+  type: jsPsychHtmlKeyboardResponse,
   stimulus: '<div style="font-size:60px;">+</div>',
   choices: "NO_KEYS",
   trial_duration: 500,
@@ -228,7 +196,7 @@ timeline.push(trial_procedure);
 /* debriefing */
 const debriefing = {
   type: jsPsychHtmlButtonResponse,
-  choices:["->"],
+  choices: ["->"],
   data: {
     task: "debriefing",
   },
@@ -248,4 +216,4 @@ const debriefing = {
 timeline.push(debriefing);
 
 /* start the experiment */
-const startWeProbe = () => jsPsych.run(timeline);
+jsPsych.run(timeline);

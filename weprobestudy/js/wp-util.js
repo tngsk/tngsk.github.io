@@ -1,4 +1,10 @@
 
+
+// Audio: Amplitube to Decibell
+const atodb = (gain) => {
+  return 20 * (Math.log(gain) / Math.LN10);
+};
+
 // Sum
 const arraySum = (data) => {
   return data.reduce((x, y) => x + y, 0);

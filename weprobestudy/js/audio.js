@@ -1,4 +1,6 @@
-// Tone
+
+// Tone.js
+
 const ADSR = {
   envelope: {
     attack: 0.01,
