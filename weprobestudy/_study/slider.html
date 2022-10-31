@@ -27,47 +27,73 @@
 
     <!-- <script src="./js/audio.js"></script> -->
     <!-- <script src="./js/main.js"></script> -->
+    <style>
+        .slider {
+            box-sizing: border-box;
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            background-color: lightgray;
+            height: 15px;
+            border-radius: 5px;
+
+
+
+        }
+
+    </style>
 </head>
 
 <body>
     <div id="console"></div>
     <div id="experiment_container"></div>
-    <div class="slidecontainer">
-        <input class="slider" id="rate-ctl" max="0" min="-90" oninput="sliderChange(this.value)" type="range" value="0">
-    </div>
-
+    <!-- <div class="slidecontainer">
+        <input class="slider" max="0" min="-90" oninput="sliderModel.set(this.value)" type="range" value="0">
+    </div> -->
 
     <script>
 
         // Main Block
 
-        const sliderChange = (value) => {
-            console.log(value);
+        const sliderModel = {
+            value:0,
+            set:(value) => {
+                sliderModel.value = value;
+            },
+            get:() => {
+                return sliderModel.value;
+            }
         }
 
+        const jsPsych = initJsPsych({
+            on_finish: () => {
+                jsPsych.data.displayData();
+            },
+        });
 
-        document.addEventListener('keyup', (e) => {
+        let timeline = [];
 
-
-            switch (e.key) {
-                case 'ArrowRight':
-                    console.log('correct, currentLevel: ' + staircase.level)
-                    staircase.addResponse(1) // true
-
-                    break;
-                case 'ArrowLeft':
-                    console.log('wrong, currentLevel:  ' + staircase.level)
-                    staircase.addResponse(0) // false
-
-                    break;
-
-                default:
-                    break;
+        const slider = {
+            type: jsPsychHtmlButtonResponse,
+            stimulus: () => {
+                return `
+                <div class="slidecontainer">
+                    <input class="slider" max="0" min="-90" oninput="sliderModel.set(this.value)" type="range" value="0">
+                </div>
+                `;
+            },
+            choices: ["OK"],
+            data: {
+                task: "slider",
+            },
+            on_finish:(data) =>{
+                console.log(sliderModel.get())
+                data.sliderValue = sliderModel.get();
             }
+        };
 
-            console.log(staircase.isDone())
-        })
-
+        timeline.push(slider)
+        jsPsych.run(timeline);
 
     </script>
 </body>
