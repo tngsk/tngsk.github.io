@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!-- weprobe template v0.1 -->
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/jspsych@7.2.3"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-browser-check@1.0.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.1"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.1.1"></script>
+    <!-- <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@1.1.1"></script> -->
+    <script src="https://unpkg.com/@jspsych/plugin-image-button-response@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-initialize-microphone@1.0.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-audio-response@1.0.2"></script>
+
+    <script src="https://unpkg.com/@jspsych/plugin-call-function@1.1.1"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.1"></script>
+    <link href="https://unpkg.com/jspsych@7.2.3/css/jspsych.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
+
+    <script src="https://unpkg.com/tone@14.7.77/build/Tone.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.js"></script>
+
+    <!-- <script src="./js/audio.js"></script> -->
+    <!-- <script src="./js/main.js"></script> -->
+</head>
+
+<body>
+    <div id="console"></div>
+    <div id="experiment_container"></div>
+    <div class="slidecontainer">
+        <input class="slider" id="rate-ctl" max="0" min="-90" oninput="sliderChange(this.value)" type="range" value="0">
+    </div>
+
+
+    <script>
+
+        // Main Block
+
+        const sliderChange = (value) => {
+            console.log(value);
+        }
+
+
+        document.addEventListener('keyup', (e) => {
+
+
+            switch (e.key) {
+                case 'ArrowRight':
+                    console.log('correct, currentLevel: ' + staircase.level)
+                    staircase.addResponse(1) // true
+
+                    break;
+                case 'ArrowLeft':
+                    console.log('wrong, currentLevel:  ' + staircase.level)
+                    staircase.addResponse(0) // false
+
+                    break;
+
+                default:
+                    break;
+            }
+
+            console.log(staircase.isDone())
+        })
+
+
+    </script>
+</body>
+
+</html>
