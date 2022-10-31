@@ -12,10 +12,12 @@ const ADSR = {
 // ----------------------------------------------------------------------
 // Instruments
 
+
+
 // Synth
 const synth = new Tone.Synth(ADSR);
 synth.oscillator.type = "sine";
-const fader1 = new Tone.Volume(0);
+const fader1 = new Tone.Volume(-6);
 synth.chain(fader1, Tone.Destination);
 
 // Noise
@@ -32,6 +34,13 @@ const BPF = new Tone.Filter(filter_options);
 const fader2 = new Tone.Volume(-6);
 // noise.chain(BPF, fader2, Tone.Destination);
 noise.chain(fader2, Tone.Destination);
+
+// LFO & AMP
+const amp1 = new Tone.Volume();
+const lfo1 = new Tone.LFO(30, -96, -6);
+lfo1.type = "sine";
+// lfo1.connect(noise.volume);
+lfo1.start();
 
 // ----------------------------------------------------------------------
 // Playing
@@ -114,4 +123,5 @@ const usermedia_stream_start = async () => {
 
 const usermedia_stream_stop = () => {
   stream.getTracks().forEach((track) => track.stop());
+  clearInterval(timerID);
 };
