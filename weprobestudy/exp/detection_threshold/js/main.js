@@ -1,6 +1,5 @@
-const WPArraySum = (data) => data.reduce((x, y) => x + y, 0);
-
-/* jsPsych */
+// ----------------------------------------------------------------------
+// jsPsych
 const jsPsych = initJsPsych({
   // display_element: "experiment_container",
   show_progress_bar: false,
@@ -12,27 +11,59 @@ const jsPsych = initJsPsych({
     jsPsych.data.displayData();
     // TODO: ここでJSONをPOSTする
     // window.location = wp_next_url;
-
-    // ローカル保存
-    jsPsych.data
-      .get()
-      .localSave("json", "detection-threshold_" + exp_id + ".json");
   },
   on_close: () => {},
 });
 
 const wp_expid = jsPsych.randomization.randomID(5);
 
-// Staircase Procedure
+// ----------------------------------------------------------------------
+// Build Timeline
+let timeline = [];
 
-WPStaircase.init();
-WPStaircase.setScale(-96, -12);
+const buildTimeline = () => {
+  // timeline.push(browsercheck);
+  timeline.push(preload);
+  // timeline.push(welcome);
+  // timeline.push(instructions);
+  timeline.push(audio_calibration_procedure);
 
-// --------------------------------------------------------------------------------
+  // ---- block 1 -----
+  // Staircaseのリセット
+  timeline.push(staircase_init);
+  // Staircase による試行
+  timeline.push(staircase_loop_1);
+  // レベルの推定
+  timeline.push(estimation_level);
+
+  // ---- block2  -----
+  // Staircaseのリセット
+  timeline.push(staircase_init);
+  // Staircase による試行
+  timeline.push(staircase_loop_2);
+  // レベルの推定
+  timeline.push(estimation_level);
+
+  // ---- block 3 -----
+  // Staircaseのリセット
+  timeline.push(staircase_init);
+  // Staircase による試行
+  timeline.push(staircase_loop_3);
+  // レベルの推定
+  timeline.push(estimation_level);
+  //
+  timeline.push(debriefing);
+
+  // Run
+  jsPsych.run(timeline);
+};
+
+// ----------------------------------------------------------------------
 // Trial Block
 
 // [BrowserCheck] - [Preload] -> [Welcome] -> [Instructions] -> [Fixation] -> [Stimulus]
 
+// ----------------------------------------------------------------------
 // Browser Check
 const browsercheck = {
   type: jsPsychBrowserCheck,
@@ -41,6 +72,7 @@ const browsercheck = {
   },
 };
 
+// ----------------------------------------------------------------------
 // preload assets
 const wp_image_path = "img/";
 const preload_images = [wp_image_path + "1.png", wp_image_path + "2.png"];
@@ -52,6 +84,7 @@ const preload = {
   },
 };
 
+// ----------------------------------------------------------------------
 // welcome message
 const welcome = {
   type: jsPsychHtmlButtonResponse,
@@ -62,6 +95,7 @@ const welcome = {
   },
 };
 
+// ----------------------------------------------------------------------
 // instructions
 let instructions_content = ``;
 
@@ -74,18 +108,8 @@ const instructions = {
   },
 };
 
+// ----------------------------------------------------------------------
 // 音量のキャリブレーション
-/*
-// TODO: プラグインを使う場合、音量レベルは独自で取得する方法に変更になる
-const initMicrophone = {
-  type: jsPsychInitializeMicrophone,
-  device_select_message:
-    "<p>Please select the microphone you would like to use.</p>",
-  button_label: "Use this microphone.",
-};
-timeline.push(initMicrophone);
-*/
-
 const audio_calibration_start = {
   type: jsPsychHtmlButtonResponse,
   stimulus:
@@ -95,65 +119,30 @@ const audio_calibration_start = {
     task: "audio_calibration",
   },
   on_finish: () => {
-    Tone.start();
+    usermedia_stream_start();
   },
 };
 
-const audio_calibration_volume = {
-  type: jsPsychHtmlButtonResponse,
-  stimulus: () => {
-    Tone.Transport.start();
-    calibration_freq.start();
-    return "端末本体の音量ボリュームを調整して、メロディが快適に聞こえる音量にしてください。終わったら[->] ボタンを押してください。";
-  },
-  choices: ["->"],
-  data: {
-    task: "audio_calibration",
-  },
-  on_finish: () => {
-    calibration_freq.stop();
-    Tone.Transport.stop();
-  },
-};
-
-let timerID = 0;
 const audio_calibration_mic = {
   type: jsPsychHtmlButtonResponse,
   data: {
     task: "audio_calibration",
   },
-  on_start: (trial) => {},
-  stimulus: (data) => {
-    // Tone.Transport.start();
-    // calibration_freq.start();
+  stimulus: () => {
     synth.triggerAttack(500);
-
-    audio_mic
-      .open()
-      .then(() => {
-        timerID = setInterval(() => {
-          let levelmeter = document.getElementById("levelmeter");
-          if (levelmeter) {
-            levelmeter.setAttribute("value", audio_meter.getValue());
-          } else {
-            // console.log(levelmeter);
-          }
-          document.getElementById("console").innerText = audio_meter.getValue();
-        }, 100);
-      })
-      .catch((error) => {});
-
-    return "端末本体の音量ボリュームを操作して、メーターが黄色になるように音量を調整してください。<meter id='levelmeter' min='-96' low='-34' optium='-30' high='-28' max='0' value='-96'></meter><div id='console'></div>";
+    return `端末本体の音量ボリュームを操作して、メーターが黄色になるように音量を調整してください。
+    <br />
+    <meter id='levelmeter' min='-96' low='-34' optium='-30' high='-28' max='0' value='-96'></meter>
+    <div id='console'></div>
+    `;
   },
   choices: ["->"],
-
   on_finish: (data) => {
-    data.calibration = audio_meter.getValue();
-    // Tone.Transport.stop();
-    // calibration_freq.stop();
-    synth.triggerRelease();
     clearInterval(timerID);
-    audio_mic.close();
+    data.mic_level = mic_level;
+    synth.triggerRelease();
+    usermedia_stream_stop();
+    Tone.start();
   },
 };
 
@@ -174,7 +163,12 @@ const fixation = {
 };
 
 // ----------------------------------------------------------------------
-// 強制選択法による実験デザイン
+// 強制選択法 + 階段法による実験デザイン
+
+// Staircase Procedure
+WPStaircase.init();
+WPStaircase.setScale(-96, -12);
+
 // Stimulus
 const stimuli = {
   male: [
@@ -266,7 +260,6 @@ const force_response = {
 };
 
 // ------------------------------------------------------------------
-
 // trial blobk
 const trial_block_1 = {
   timeline_variables: stimuli["male"],
@@ -294,7 +287,6 @@ const trial_block_3 = {
     size: 1,
   },
 };
-
 
 const staircase_loop_1 = {
   timeline: [trial_block_1],
@@ -330,12 +322,13 @@ const estimation_level = {
   },
 };
 
+// ----------------------------------------------------------------------
 // ステップをリセットする
 const staircase_init = {
   type: jsPsychCallFunction,
   func: () => {
     WPStaircase.init();
-    WPStaircase.setScale(-96, -12);
+    WPStaircase.setScale(-96, 0);
     return "";
   },
   data: {
@@ -343,7 +336,8 @@ const staircase_init = {
   },
 };
 
-/* debriefing */
+// ----------------------------------------------------------------------
+// debriefing
 const debriefing = {
   type: jsPsychHtmlButtonResponse,
   choices: ["->"],
@@ -367,40 +361,4 @@ const debriefing = {
 // ----------------------------------------------------------------------
 // Build Timeline
 
-let timeline = [];
-
-// timeline.push(browsercheck);
-timeline.push(preload);
-// timeline.push(welcome);
-// timeline.push(instructions);
-timeline.push(audio_calibration_procedure);
-
-// ---- block 1 -----
-// Staircaseのリセット
-timeline.push(staircase_init);
-// Staircase による試行
-timeline.push(staircase_loop_1);
-// レベルの推定
-timeline.push(estimation_level);
-
-// ---- block2  -----
-// Staircaseのリセット
-timeline.push(staircase_init);
-// Staircase による試行
-timeline.push(staircase_loop_2);
-// レベルの推定
-timeline.push(estimation_level);
-
-// ---- block 3 -----
-// Staircaseのリセット
-timeline.push(staircase_init);
-// Staircase による試行
-timeline.push(staircase_loop_3);
-// レベルの推定
-timeline.push(estimation_level);
-
-//
-timeline.push(debriefing);
-
-
-jsPsych.run(timeline);
+buildTimeline();

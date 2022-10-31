@@ -1,4 +1,3 @@
-
 // ----------------------------------------------------------------------
 // jsPsych
 const jsPsych = initJsPsych({
@@ -24,9 +23,12 @@ let timeline = [];
 
 const buildTimeline = () => {
   // timeline.push(browsercheck);
+
   timeline.push(preload);
+
   // timeline.push(welcome);
   // timeline.push(instructions);
+
   timeline.push(audio_calibration_procedure);
 
   // ---- block 1 -----
@@ -45,20 +47,12 @@ const buildTimeline = () => {
   // レベルの推定
   timeline.push(estimation_level);
 
-  // ---- block 3 -----
-  // Staircaseのリセット
-  timeline.push(staircase_init);
-  // Staircase による試行
-  timeline.push(staircase_loop_3);
-  // レベルの推定
-  timeline.push(estimation_level);
   //
   timeline.push(debriefing);
 
   // Run
   jsPsych.run(timeline);
-
-}
+};
 
 // ----------------------------------------------------------------------
 // Trial Block
@@ -90,7 +84,8 @@ const preload = {
 // welcome message
 const welcome = {
   type: jsPsychHtmlButtonResponse,
-  stimulus: "Welcome to the experiment. Press any key to begin.",
+  stimulus: `<h4>雑音の中の音を聞き分ける実験</h4><p>本日は実験にご協力いただきありがとうございます！</p>
+  <p>本実験は音が鳴ります。本体のボリュームを小さめに設定して、[Continue] ボタンを押してください。</p>`,
   choices: ["->"],
   data: {
     task: "welcome",
@@ -112,13 +107,6 @@ const instructions = {
 
 // ----------------------------------------------------------------------
 // 音量のキャリブレーション
-
-let stream;
-let analyzer;
-
-let timerID;
-let mic_level = 0;
-
 const audio_calibration_start = {
   type: jsPsychHtmlButtonResponse,
   stimulus:
@@ -127,28 +115,8 @@ const audio_calibration_start = {
   data: {
     task: "audio_calibration",
   },
-  on_finish: async () => {
-    const audioCtx = new AudioContext();
-    stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    const input = audioCtx.createMediaStreamSource(stream);
-    analyzer = audioCtx.createAnalyser();
-    input.connect(analyzer);
-    const timeDomainArray = new Float32Array(analyzer.fftSize);
-    let _rms = 0;
-    timerID = setInterval(() => {
-      // マイク入力をdBに変換する
-      analyzer.getFloatTimeDomainData(timeDomainArray);
-      const totalSquared = timeDomainArray.reduce(
-        (total, current) => total + current * current,0);
-      const rms = Math.sqrt(totalSquared / timeDomainArray.length);
-      _rms = Math.max(rms, _rms * 0.2); // smoothing = 0.2
-      mic_level = atodb(_rms);
-      // レベルメーターに反映
-      const levelmeter = document.getElementById("levelmeter");
-      if (levelmeter) {
-        levelmeter.setAttribute("value", mic_level)
-      }
-    }, 100);
+  on_finish: () => {
+    usermedia_stream_start();
   },
 };
 
@@ -170,7 +138,7 @@ const audio_calibration_mic = {
     clearInterval(timerID);
     data.mic_level = mic_level;
     synth.triggerRelease();
-    stream.getTracks().forEach((track) => track.stop());
+    usermedia_stream_stop();
     Tone.start();
   },
 };
@@ -200,29 +168,64 @@ WPStaircase.setScale(-96, -12);
 
 // Stimulus
 const stimuli = {
-  male: [
-    { position: "first", stimulus: 125 },
-    { position: "second", stimulus: 125 },
+  signal125: [
+    { section: "signal", position: "first", stimulus: 125 },
+    { section: "signal", position: "second", stimulus: 125 },
   ],
-  female: [
-    { position: "first", stimulus: 250 },
-    { position: "second", stimulus: 250 },
+  signal250: [
+    { section: "signal", position: "first", stimulus: 250 },
+    { section: "signal", position: "second", stimulus: 250 },
   ],
-  4000: [
-    { position: "first", stimulus: 4000 },
-    { position: "second", stimulus: 4000 },
+  signal4000: [
+    { section: "signal", position: "first", stimulus: 4000 },
+    { section: "signal", position: "second", stimulus: 4000 },
+  ],
+  masking125: [
+    { section: "masking", position: "first", stimulus: 125 },
+    { section: "masking", position: "second", stimulus: 125 },
+  ],
+  masking250: [
+    { section: "masking", position: "first", stimulus: 250 },
+    { section: "masking", position: "second", stimulus: 250 },
+  ],
+  masking4000: [
+    { section: "masking", position: "first", stimulus: 4000 },
+    { section: "masking", position: "second", stimulus: 4000 },
   ],
 };
 
 const force_choice_first = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: () => {
+    const section = jsPsych.timelineVariable("section");
     const position = jsPsych.timelineVariable("position");
     const freq = jsPsych.timelineVariable("stimulus");
-    if (position == "first") {
-      const dB = WPStaircase.get();
-      play_signal(freq, dB);
+
+    // シグナルセクションとマスキングセクションの切り替え
+    switch (section) {
+      case "signal":
+        if (position == "first") {
+          const dB = WPStaircase.get();
+          play_signal(freq, dB);
+        }
+        break;
+
+      case "masking":
+        if (position == "first") {
+          // Masker + Signal
+          const dB = WPStaircase.get();
+          play_signal_and_masker(freq, dB);
+        } else {
+          // Masker
+          play_masker(freq);
+        }
+
+        break;
+
+      default:
+        break;
     }
+
     return '<img src="img/1.png" />';
   },
   choices: "NO_KEYS",
@@ -236,11 +239,33 @@ const force_choice_first = {
 const force_choice_second = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: () => {
+    const section = jsPsych.timelineVariable("section");
     const position = jsPsych.timelineVariable("position");
     const freq = jsPsych.timelineVariable("stimulus");
-    if (position == "second") {
-      const dB = WPStaircase.get();
-      play_signal(freq, dB);
+
+    // シグナルセクションとマスキングセクションの切り替え
+    switch (section) {
+      case "signal":
+        if (position == "second") {
+          const dB = WPStaircase.get();
+          play_signal(freq, dB);
+        }
+        break;
+
+      case "masking":
+        if (position == "second") {
+          // Masker + Signal
+          const dB = WPStaircase.get();
+          play_signal_and_masker(freq, dB);
+        } else {
+          // Masker
+          play_masker(freq);
+        }
+
+        break;
+
+      default:
+        break;
     }
     return '<img src="img/2.png" />';
   },
@@ -268,6 +293,9 @@ const force_response = {
     value: () => {
       return WPStaircase.get();
     },
+    section: () => {
+      return jsPsych.timelineVariable("section");
+    },
     stimulus: () => {
       return jsPsych.timelineVariable("stimulus");
     },
@@ -282,16 +310,16 @@ const force_response = {
       data.correct_response
     );
     // staircase に反応を記録する
-    WPStaircase.addResponse(data.correct);
+    WPStaircase.addResponse(data.correct, data.value);
     // どの刺激かタグ付け TODO: 毎回重複するのでちょっと無駄
-    WPStaircase.setTag(data.stimulus);
+    WPStaircase.setTag(`${data.section}:${data.stimulus}`);
   },
 };
 
 // ------------------------------------------------------------------
 // trial blobk
 const trial_block_1 = {
-  timeline_variables: stimuli["male"],
+  timeline_variables: stimuli["signal250"],
   timeline: [fixation, force_choice_first, force_choice_second, force_response],
   sample: {
     type: "fixed-repetitions", // random order
@@ -300,16 +328,7 @@ const trial_block_1 = {
 };
 
 const trial_block_2 = {
-  timeline_variables: stimuli["female"],
-  timeline: [fixation, force_choice_first, force_choice_second, force_response],
-  sample: {
-    type: "fixed-repetitions", // random order
-    size: 1,
-  },
-};
-
-const trial_block_3 = {
-  timeline_variables: stimuli["4000"],
+  timeline_variables: stimuli["masking250"],
   timeline: [fixation, force_choice_first, force_choice_second, force_response],
   sample: {
     type: "fixed-repetitions", // random order
@@ -331,12 +350,6 @@ const staircase_loop_2 = {
   },
 };
 
-const staircase_loop_3 = {
-  timeline: [trial_block_3],
-  loop_function: (data) => {
-    return WPStaircase.isLoop();
-  },
-};
 // ------------------------------------------------------------------
 // 信号レベル推定
 // 反転したときの数値を平均したもの
@@ -387,8 +400,7 @@ const debriefing = {
   },
 };
 
-
 // ----------------------------------------------------------------------
 // Build Timeline
 
-buildTimeline()
+buildTimeline();

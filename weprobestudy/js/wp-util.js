@@ -1,5 +1,3 @@
-
-
 // Audio: Amplitube to Decibell
 const atodb = (gain) => {
   return 20 * (Math.log(gain) / Math.LN10);
@@ -12,8 +10,8 @@ const arraySum = (data) => {
 
 // Mean
 const arrayMean = (data) => {
-    return arraySum(data) / data.length
-}
+  return arraySum(data) / data.length;
+};
 
 // Limitter
 const limiter = (n, low, high) => {
@@ -30,7 +28,6 @@ const map = (n, start1, stop1, start2, stop2) => {
     return limiter(newval, stop2, start2);
   }
 };
-
 
 // Staircase Method
 const WPStaircase = {
@@ -84,38 +81,7 @@ const WPStaircase = {
     );
     return WPStaircase.mappedLevel;
   },
-  addResponse: (response) => {
-    // 試行回数をカウント
-    WPStaircase.trialCount += 1;
-
-    // 反応を記録 : true(1) or false(0)
-    if (response) {
-      WPStaircase.positiveCount++;
-    } else {
-      WPStaircase.negativeCount++;
-    }
-
-    // 反転
-    if (WPStaircase.direction != WPStaircase.lastDirection) {
-      WPStaircase.lastDirection = WPStaircase.direction;
-        WPStaircase.flipCount++;
-        console.log("flip:" + WPStaircase.flipCount);
-      // 反転したときの数値を記録
-      // WPStaircase.responses[WPStaircase.flipCount - 1] = WPStaircase.level;
-      WPStaircase.responses[WPStaircase.flipCount - 1] = WPStaircase.get();
-    }
-
-    // 誤反応
-    if (WPStaircase.negativeCount >= 1) {
-      WPStaircase.reset();
-      WPStaircase.level = WPStaircase.level * 10.0 ** WPStaircase.stepSize;
-      if (WPStaircase.level >= WPStaircase.max) {
-        WPStaircase.level = WPStaircase.max;
-      }
-      WPStaircase.direction = "Up";
-    }
-
-    // 正反応
+  addResponse: (response, stimulus_value) => {
     const condi = () => {
       let result = WPStaircase.flipCount ? 3 : 1;
       if (WPStaircase.direction == "Down") {
@@ -123,13 +89,44 @@ const WPStaircase = {
       }
       return result;
     };
-    if (WPStaircase.positiveCount >= condi()) {
-      WPStaircase.reset();
-      WPStaircase.level = WPStaircase.level / 10.0 ** WPStaircase.stepSize;
-      if (WPStaircase.level <= WPStaircase.min) {
-        WPStaircase.level = WPStaircase.min;
+
+    // 試行回数をカウント
+    WPStaircase.trialCount += 1;
+
+    // 反応を記録 : true(1) or false(0)
+    if (response) {
+
+      WPStaircase.positiveCount++;
+
+      if (WPStaircase.positiveCount >= condi()) {
+        // 正反応
+        WPStaircase.reset();
+        WPStaircase.level = WPStaircase.level / 10.0 ** WPStaircase.stepSize;
+        if (WPStaircase.level <= WPStaircase.min) {
+          WPStaircase.level = WPStaircase.min;
+        }
+        WPStaircase.direction = "Down";
       }
-      WPStaircase.direction = "Down";
+    } else {
+
+      WPStaircase.negativeCount++;
+
+      if (WPStaircase.negativeCount >= 1) {
+        // 誤反応
+        WPStaircase.reset();
+        WPStaircase.level = WPStaircase.level * 10.0 ** WPStaircase.stepSize;
+        if (WPStaircase.level >= WPStaircase.max) {
+          WPStaircase.level = WPStaircase.max;
+        }
+        WPStaircase.direction = "Up";
+      }
+    }
+    // 反転
+    if (WPStaircase.direction != WPStaircase.lastDirection) {
+      WPStaircase.lastDirection = WPStaircase.direction;
+      // 反転したときの数値を記録
+      WPStaircase.responses[WPStaircase.flipCount] = stimulus_value;
+      WPStaircase.flipCount++;
     }
   },
   isLoop: () => {
