@@ -2,10 +2,10 @@
 
 const ADSR = {
   envelope: {
-    attack: 0.01,
+    attack: 0.05,
     decay: 0.0,
     sustain: 1.0,
-    release: 0.01,
+    release: 0.05,
   },
 };
 
@@ -29,14 +29,15 @@ const filter_options = {
   Q: 440 / 90,
 };
 const BPF = new Tone.Filter(filter_options);
-const fader2 = new Tone.Volume(0);
-noise.chain(BPF, fader2, Tone.Destination);
+const fader2 = new Tone.Volume(-6);
+// noise.chain(BPF, fader2, Tone.Destination);
+noise.chain(fader2, Tone.Destination);
 
 // ----------------------------------------------------------------------
 // Playing
 
-let signal_level_dB = -6;
-let masker_level_dB = -6;
+// let signal_level_dB = -6;
+// let masker_level_dB = -6;
 
 // signal
 const play_signal = (freq, dB) => {
@@ -46,22 +47,20 @@ const play_signal = (freq, dB) => {
 
 // masker
 const play_masker = (freq) => {
-  fader2.volume.value = masker_level_dB;
-  BPF.frequency = freq;
-  BPF.Q = freq / 90;
-  noise.triggerAttackRelease(0.5);
+  // fader2.volume.value = masker_level_dB;
+  // BPF.frequency = freq;
+  // BPF.Q = freq / 90;
+  noise.triggerAttackRelease(0.2);
 };
 
 // signal + masker
 const play_signal_and_masker = (freq, signal_dB) => {
   fader1.volume.value = signal_dB;
-  fader2.volume.value = masker_level_dB;
-
-  BPF.frequency = freq;
-  BPF.Q = freq / 90;
-
-  noise.triggerAttackRelease(0.5);
-  synth.triggerAttackRelease(freq, 0.5);
+  // fader2.volume.value = masker_level_dB;
+  // BPF.frequency = freq;
+  // BPF.Q = freq / 90;
+  noise.triggerAttackRelease(0.2);
+  synth.triggerAttackRelease(freq, 0.2);
 };
 
 // ----------------------------------------------------------------------

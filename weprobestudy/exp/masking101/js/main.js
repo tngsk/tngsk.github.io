@@ -162,10 +162,6 @@ const fixation = {
 // ----------------------------------------------------------------------
 // 強制選択法 + 階段法による実験デザイン
 
-// Staircase Procedure
-WPStaircase.init();
-WPStaircase.setScale(-96, -12);
-
 // Stimulus
 const stimuli = {
   signal125: [
@@ -370,7 +366,7 @@ const staircase_init = {
   type: jsPsychCallFunction,
   func: () => {
     WPStaircase.init();
-    WPStaircase.setScale(-96, 0);
+    WPStaircase.setScale(-96, -12);
     return "";
   },
   data: {
