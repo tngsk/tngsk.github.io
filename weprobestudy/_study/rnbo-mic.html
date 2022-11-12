@@ -34,14 +34,9 @@
     <link href="../css/style.css" rel="stylesheet" type="text/css" />
 
     <style>
-        .slider {
-            box-sizing: border-box;
-            -webkit-appearance: none;
-            appearance: none;
+        #meter1 {
             width: 100%;
-            background-color: lightgray;
-            height: 15px;
-            border-radius: 5px;
+            height: 50px;
         }
 
     </style>
@@ -49,95 +44,57 @@
 
 <body>
     <div id="console"></div>
-    <div class="slidecontainer">
-        <input id="freq" class="slider" max="8000" min="0" oninput="sliderUpdate(this)" type="range" value="250">
-    </div>
+    <meter id="meter1" min="-90" max="0" value="-90"></meter>
     <div id="experiment_container"></div>
-
 
     <script>
 
         // RNBO
         let WAContext = window.AudioContext || window.webkitAudioContext;
         let context = new WAContext();
-        const gainNode = context.createGain();
-        gainNode.connect(context.destination);
-
-        const bang1 = new RNBO.MessageEvent(RNBO.TimeNow, "in1", [1]);
-        const bang0 = new RNBO.MessageEvent(RNBO.TimeNow, "in1", [0]);
 
         // create device
         let device;
-        let UserMediaSource;
+        let stream;
+        let current_input_level = [];
         const setup = async () => {
-            let rawPatcher = await fetch("weprobe.test_mic.export.json");
+            let rawPatcher = await fetch("weprobe.input_level_report.export.json");
             let patcher = await rawPatcher.json();
             device = await RNBO.createDevice({ context, patcher });
-            // device.node.connect(gainNode);
-            // device.node.connect(context.destination);
 
             navigator.mediaDevices.getUserMedia({ audio: true, video: false })
-                .then((stream) => {
-                    UserMediaSource = context.createMediaStreamSource(stream);
+                .then((_stream) => {
+                    stream = _stream;
+                    const UserMediaSource = context.createMediaStreamSource(stream);
                     UserMediaSource.connect(device.node);
                 });
 
+            device.parametersById.get("report").value = 0;
+            // device.parametersById.get("report_interval").value = 10;
             device.messageEvent.subscribe((ev) => {
-                console.log(`${ev.tag}: ${ev.payload}`);
+                switch (ev.tag) {
+                    case "out2":
+                        document.getElementById("meter1").value = ev.payload;
+                        current_input_level.push(ev.payload);
+                        break;
+                    default:
+                        break;
+                }
             })
         };
 
         setup();
 
 
-
-        // Slider Update
-        let current_sliderValue = 0;
-        const sliderUpdate = (element) => {
-            current_sliderValue = parseInt(element.value);
-            console.log(current_sliderValue);
-        }
-
-        // Slider Update
-        let current_buttonStatus = false;
-        const buttonUpdate = () => {
-            current_buttonStatus = !current_buttonStatus;
-            console.log(current_buttonStatus);
-            if (current_buttonStatus) {
-                // lfo1.connect(noise.volume);
-            } else {
-                // lfo1.disconnect(noise.volume);
-            }
-        }
-
-
         // Main
         const jsPsych = initJsPsych({
-            // display_element: "experiment_container",
+            display_element: "experiment_container",
             on_finish: () => {
                 jsPsych.data.displayData();
             },
         });
 
         let timeline = [];
-
-        const slider = {
-            type: jsPsychHtmlButtonResponse,
-            stimulus: () => {
-
-                // device.scheduleEvent(bang1);
-
-                return `<div class="slidecontainer"><input class="slider" min="0" max="8000" oninput="sliderUpdate(this)" type="range" value="250"><input type="button" onclick="buttonUpdate(this)"></div>`;
-            },
-            choices: ["OK"],
-            data: {
-                task: "slider",
-            },
-            on_finish: (data) => {
-                data.response = current_sliderValue;
-                // device.scheduleEvent(bang0);
-            }
-        };
 
         const start_audio = {
             type: jsPsychHtmlButtonResponse,
@@ -153,8 +110,26 @@
             }
         };
 
+        const input_level = {
+            type: jsPsychHtmlButtonResponse,
+            stimulus: () => {
+                device.parametersById.get("report").value = 1;
+                return "";
+            },
+            choices: ["OK"],
+            data: {
+                task: "input_level",
+            },
+            on_finish: (data) => {
+                stream.getTracks().forEach(track => track.stop());
+                device.parametersById.get("report").value = 0;
+                data.response = current_input_level;
+                data.input_average = arrayMean(current_input_level);
+            }
+        };
+
         timeline.push(start_audio);
-        timeline.push(slider)
+        timeline.push(input_level);
         jsPsych.run(timeline);
 
     </script>
