@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!-- weprobe template v0.1 -->
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/jspsych@7.2.3"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-browser-check@1.0.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.1"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.1.1"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-image-button-response@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-initialize-microphone@1.0.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-audio-response@1.0.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-slider-response@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-fullscreen@1.1.2"></script>
+
+    <script src="https://unpkg.com/@jspsych/plugin-call-function@1.1.1"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.1"></script>
+    <link href="https://unpkg.com/jspsych@7.2.3/css/jspsych.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            /* border: 1px solid red; */
+            user-select: none;
+        }
+
+        html,
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            height: 100%;
+            position: relative;
+        }
+
+        .container {
+            width: 100%;
+            padding: 10px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            -webkit-transform: translateY(-50%);
+        }
+
+        #flip_container {
+            display: flex;
+            align-items: center;
+        }
+
+        .reverse {
+            /* flex-direction: row-reverse; */
+            transform: scale(-1, 1);
+            -webkit-transform: scale(-1, 1);
+        }
+
+        .cue {
+            width: 30px;
+            height: 30px;
+            background-color: #000000;
+            border-radius: 15px;
+        }
+
+        .target {
+            width: 80%;
+            height: 20px;
+            background-color: #000000;
+            position: relative;
+            left: 20px;
+            top: 0px;
+        }
+
+        .blink {
+            background-color: #ffffff;
+        }
+
+        #fixation {
+            font-size: 80px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            -webkit-transform: translateY(-50%);
+            visibility: hidden;
+            z-index: 1;
+        }
+
+        #layout {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .jspsych-content {
+            max-width: 100%;
+        }
+
+        #experiment_container {
+            position: absolute;
+            bottom: 10%;
+        }
+
+        #stimulus_block {
+            visibility: hidden;
+        }
+
+        button {
+            width: 5rem;
+            font-size: 1.6rem;
+            font-weight: 700;
+            line-height: 1.5;
+            display: inline-block;
+            padding: 1rem 4rem;
+            border-radius: 0.5rem;
+        }
+
+        input {
+            width: 300px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div id="layout">
+
+        <div id="fixation">+</div>
+
+        <div id="stimulus_block" class="container">
+            <div id="flip_container">
+                <div id="cue1" class="cue"></div>
+                <div id="target1" class="target"></div>
+            </div>
+        </div>
+
+        <div id="experiment_container"></div>
+
+    </div>
+
+
+    <script>
+
+        // Main
+        const jsPsych = initJsPsych({
+            display_element: "experiment_container",
+            on_finish: () => {
+                // jsPsych.data.displayData();
+                jsPsych.data.get().localSave('json', 'mydata.json');
+            },
+        });
+
+        let timeline = [];
+
+        const start = {
+            type: jsPsychHtmlButtonResponse,
+            stimulus: "ボタンを押すと実験が始まります",
+            choices: ['スタート'],
+        }
+
+        const fixation = {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: () => {
+                document.getElementById('fixation').style.visibility = 'visible';
+                return "";
+            }
+            ,
+            choices: "NO_KEYS",
+            trial_duration: 500,
+            post_trial_gap: 500,
+            data: {
+                task: "fixation",
+            },
+            on_finish: () => {
+                document.getElementById('fixation').style.visibility = 'hidden';
+            }
+        };
+
+        const cue = {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: () => {
+                document.getElementById('stimulus_block').style.visibility = 'visible'
+                document.getElementById('cue1').classList.add('blink');
+                return "";
+            },
+            choices: 'NO_KEYS',
+            trial_duration: function () {
+                return jsPsych.timelineVariable('lead_time');
+            },
+            data: {
+                task: "cue",
+            },
+            on_finish: (data) => {
+
+            }
+        };
+
+        const target = {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: () => {
+                document.getElementById('target1').classList.add('blink');
+                return "";
+            },
+            choices: 'NO_KEYS',
+            trial_duration: 1000,
+            data: {
+                task: "target",
+            },
+            on_finish: (data) => {
+
+            }
+        };
+
+        const reset = {
+            type: jsPsychCallFunction,
+            func: () => {
+                document.getElementById('cue1').classList.remove('blink');
+                document.getElementById('target1').classList.remove('blink');
+                return "";
+            },
+            post_trial_gap: 1000,
+        }
+
+        const direction = {
+            type: jsPsychCallFunction,
+            func: () => {
+                const d = jsPsych.timelineVariable('cue_direction');
+                const flip_target = document.getElementById('flip_container');
+                flip_target.classList.remove('reverse');
+                if (d == 'right') {
+                    flip_target.classList.add('reverse');
+                }
+                return "";
+            },
+        }
+
+        const response = {
+            type: jsPsychHtmlButtonResponse,
+            stimulus: '',
+            choices: [' ← ', ' → '],
+            data: {
+                task: 'response',
+                cue_direction: () => jsPsych.timelineVariable('cue_direction'),
+            },
+            on_finish: (data) => {
+                document.getElementById('stimulus_block').style.visibility = 'hidden';
+                data.response = ["left", "right"][data.response];
+                if (jsPsych.pluginAPI.compareKeys(data.response, data.cue_direction)) {
+                    data.ILM = false;
+                } else {
+                    data.ILM = true;
+                }
+            }
+        }
+
+        const factors = {
+            lead_time: [0, 10, 25, 50, 100, 200, 300, 400, 500, 1500, 2500, 3500, 4500],
+            cue_direction: ['left', 'right'],
+        }
+
+        const full_design = jsPsych.randomization.factorial(factors, 1);
+
+        const trial_block = {
+            timeline: [direction, fixation, cue, target, response, reset],
+            timeline_variables: full_design,
+            sample: {
+                type: 'fixed-repetitions',
+                size: 2
+            }
+        }
+
+        const enter_fullscreen = {
+            type: jsPsychFullscreen,
+            fullscreen_mode: true,
+            message: '<p>ボタンを押すと画面がフルスクリーンモードになります</p>',
+            button_label: '続ける'
+        }
+        const exit_fullscreen = {
+            type: jsPsychFullscreen,
+            fullscreen_mode: false,
+        }
+
+        let SOA = 100;
+        let response_slider_value = 0;
+        let trial_loop_interval = 0;
+        const interval_time = 5000;
+
+        const trial = () => {
+            // Fixation ON
+            document.getElementById('fixation').style.visibility = 'visible';
+            setTimeout(() => {
+
+                // リードタイム後にターゲット刺激を表示
+                setTimeout(() => {
+                    document.getElementById('target1').classList.add('blink');
+
+                    // 指定秒数後に刺激をリセットする
+                    setTimeout(() => {
+                        document.getElementById('cue1').classList.remove('blink');
+                        document.getElementById('target1').classList.remove('blink');
+                        // 試行ごとに方向を反転させる
+                        if (Math.random() >= 0.49) {
+                            document.getElementById('flip_container').classList.toggle('reverse');
+                        }
+
+                    }, interval_time / 2.0);
+                }, SOA);
+
+                // Fixation OFF
+                document.getElementById('fixation').style.visibility = 'hidden';
+                // 刺激画面の表示
+                document.getElementById('stimulus_block').style.visibility = 'visible'
+                // キュー刺激を表示
+                document.getElementById('cue1').classList.add('blink');
+
+            }, 500
+            )
+        }
+
+        const sliderUpdate = (e) => {
+            response_slider_value = e.value
+            switch (e.id) {
+                case 'slider1':
+                    document.getElementById('target1').style.left = `${e.value}px`
+                    break;
+                case 'slider2':
+                    SOA = e.value;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        const distance = {
+            type: jsPsychHtmlButtonResponse,
+            stimulus: () => {
+                // バーの位置を初期に戻す
+                document.getElementById('target1').style.left = `20px`
+                trial_loop_interval = setInterval(() => {
+                    trial();
+                }, interval_time);
+                return `<p>間隔の調整</p>
+                <p>ラインが止まって見えるようにスライダーを調整してください。</p><p>繰り返し表示されるので、位置が決まったらOKボタンを押してください。</p>
+                <input id="slider1" type="range" min="0" max="1000" value="10" oninput="sliderUpdate(this)" />`
+            },
+            choices: ['OK'],
+            data: {
+                task: 'response-distance-px',
+            },
+            on_finish: (data) => {
+                clearInterval(trial_loop_interval);
+                document.getElementById('stimulus_block').style.visibility = 'hidden';
+                data.response = response_slider_value
+            }
+        }
+
+        const timing = {
+            type: jsPsychHtmlButtonResponse,
+            stimulus: () => {
+                trial_loop_interval = setInterval(() => {
+                    trial();
+                }, interval_time);
+                return `<p>rタイミングの調整</p>
+                <p>ラインが止まって見えるようにスライダーを調整してください。</p><p>繰り返し表示されるので、タイミングが決まったらOKボタンを押してください。</p>
+                <input id="slider2" type="range" min="0" max="5000" value="${SOA}" oninput="sliderUpdate(this)" />`
+            },
+            choices: ['OK'],
+            data: {
+                task: 'response-timing-ms',
+            },
+            on_finish: (data) => {
+                clearInterval(trial_loop_interval);
+                document.getElementById('stimulus_block').style.visibility = 'hidden';
+                data.response = response_slider_value
+            }
+        }
+
+        const pause1 = {
+            type: jsPsychHtmlButtonResponse,
+            stimulus: "<p>次の実験に移ります。ラインが動いた方向をボタンで回答してください。</p><p>動いていないと感じた時は、●の方向を回答してください。</p>",
+            choices: ['スタート'],
+        }
+
+        const debriefing = {
+            type: jsPsychHtmlButtonResponse,
+            stimulus: "<p>実験は終了です。お疲れさまでした。終了ボタンを押してデータを送信してください。</p>",
+            choices: ['終了'],
+        }
+
+        timeline.push(enter_fullscreen);
+        timeline.push(start);
+
+        timeline.push(distance);
+        timeline.push(timing);
+        timeline.push(pause1);
+        timeline.push(trial_block);
+        timeline.push(debriefing);
+        timeline.push(exit_fullscreen);
+        jsPsych.run(timeline);
+
+    </script>
+</body>
+
+</html>
