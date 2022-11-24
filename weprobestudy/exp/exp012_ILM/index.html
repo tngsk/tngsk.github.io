@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="cupcake" class="h-screen">
+<!-- weprobe template v0.1 -->
+<!-- exp011 ILM -->
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/jspsych@7.2.3"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-browser-check@1.0.2"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.1"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.1.1"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-html-slider-response@1.1.2"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-image-button-response@1.1.2"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-fullscreen@1.1.2"></script>
+
+  <script src="https://unpkg.com/@jspsych/plugin-call-function@1.1.1"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.1"></script>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
+
+  <link rel="stylesheet" href="css/weprobe.css" />
+
+  <!-- WeProbe Common File -->
+  <!-- <script src="../../js/wp-util.js"></script>
+  <script src="../../js/audio.js"></script> -->
+  <!-- <link href="../../css/style.css" rel="stylesheet" type="text/css" /> -->
+
+  <!-- Experiment Main File -->
+  <!-- <link href="css/style.css" rel="stylesheet" type="text/css" /> -->
+  <script src="js/main.js"></script>
+</head>
+
+<body class="h-full">
+  <div id="weprobe-container" class="container mx-auto h-full flex flex-col items-center justify-between">
+
+    <!-- Header Block -->
+    <div id="header_block" class="w-full text-center mt-2"></div>
+
+    <!-- Stimulus Block -->
+    <div id="stimulus_block" class="flex-none w-full p-5 absolute top-2/4 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40">
+      <div id="fixation">+</div>
+      <div id="stimulus" class="flex items-center">
+        <div id="cue1" class="cue flex-none"></div>
+        <div id="spacer1" class="flex-none"></div>
+        <div id="target1" class="target flex-none"></div>
+      </div>
+    </div>
+
+    <!-- jsPsych Display Element -->
+    <div id="experiment_block" class="w-full mb-10 text-center"></div>
+
+  </div>
+</body>
+
+</html>
