@@ -27,26 +27,27 @@
 
         function setup() {
             createCanvas(300, 300)
-            frameRate(15)
+            frameRate(60)
+            noStroke()
         }
 
         function draw() {
 
-            // background(0)
+            background(255)
 
-            r = map(captureValue, -99, 0, 150, 0, true)
-            if (r > 100) {
-                fill(255, 0, 0)
+            r = map(captureValue, -99, 0, 0, 100, true)
+            if (r > 80) {
+                fill(255,0,0)
             } else {
-                fill(255)
+                fill(100,100,100)
             }
-            // ellipse(width/2, height/2, r, r)
-            point(x % width, r)
-            if (x % width == 0) {
-                x = 0
-                background(255)
-            }
-            x += 1
+            ellipse(width/2, height/2, r, r)
+            // point(x % width, r)
+            // if (x % width == 0) {
+            //     x = 0
+            //     background(255)
+            // }
+            // x += 1
         }
 
         const debug = (text) => {
@@ -71,7 +72,7 @@
             })
 
             const mic = new Tone.UserMedia({
-                volume: -12,
+                volume: 0,
                 mute: false
             }).connect(meter)
 
@@ -79,9 +80,9 @@
             await mic.open().then(() => {
                 timerID = setInterval(() => {
                     captureValue = meter.getValue()
-                    // debug(`mic:${mic.state}`)
-                }, 100);
-                // debug(mic.deviceId);
+                    debug(`mic:${mic.state}`)
+                }, 16.6);
+                debug(mic.deviceId);
             }).catch(error => {
                 debug('mic open error');
             })
