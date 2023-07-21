@@ -28,7 +28,7 @@ const trigger_start = async () => {
 			const UserMediaSource = context.createMediaStreamSource(stream);
 			UserMediaSource.connect(device.node);
 		});
-	device.parametersById.get("threshold_dB").value = -36;
+	device.parametersById.get("threshold_dB").value = -18;
 	device.parametersById.get("report_interval").value = 100;
 	device.messageEvent.subscribe((ev) => {
 		switch (ev.tag) {

@@ -79,7 +79,7 @@ window.addEventListener("load", () => {
 	// 音がした！イベントに反応する処理
 	document.addEventListener("audioIn", () => {
 		// 1. ループ回数以下だったら反応しない
-		if (loop_count < 2) {
+		if (loop_count < 3) {
 			return;
         }
 
