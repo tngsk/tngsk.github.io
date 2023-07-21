@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ja" id="html">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script src="./src/rnbo.min.js"></script>
+    <script src="./src/audiotrigger.js"></script>
+
+</head>
+
+<body>
+    <!-- ここからコンテンツを書く -->
+    <div id="header">
+        <div id="title">表現技術および同演習Ⅲ｜2年次｜インタラクション課題（2023）｜『よい予感』
+        </div>
+        <div id="info">学籍番号 名前</div>
+    </div>
+
+    <video src="" id="loop_movie" muted></video>
+    <video src="" id="reaction_movie" class="hide"></video>
+
+    <script>
+        const jsonData = [
+                {
+                    "id": 2221102,
+                    "name": "\u77f3\u5c71 \u7f8e\u82b1",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221102_good_loop.mp4",
+                    "reaction_movie": "2221102_good_reaction.mp4"
+                },
+                {
+                    "id": 2221105,
+                    "name": "\u53ca\u5ddd \u96c4\u5927",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221105_good_loop.mp4",
+                    "reaction_movie": "2221105_good_reaction.mp4"
+                },
+                {
+                    "id": 2221108,
+                    "name": "\u5c3e\u5f62 \u512a\u751f",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221108_good_loop.mp4",
+                    "reaction_movie": "2221108_good_reaction.mp4"
+                },
+                {
+                    "id": 2221109,
+                    "name": "\u52a0\u85e4 \u9e97",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221109_good_loop.mp4",
+                    "reaction_movie": "2221109_good_reaction.mp4"
+                },
+                {
+                    "id": 2221112,
+                    "name": "\u52a0\u8302 \u51dc\u3005\u5b50",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221112_good_loop.mp4",
+                    "reaction_movie": "2221112_good_reaction.mp4"
+                },
+                {
+                    "id": 2221113,
+                    "name": "\u5ddd\u6751 \u548c",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221113_good_loop.mp4",
+                    "reaction_movie": "2221113_good_reaction.mp4"
+                },
+                {
+                    "id": 2221114,
+                    "name": "\u4e45\u4e0b \u590f\u5b9f",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221114_good_loop.mp4",
+                    "reaction_movie": "2221114_good_reaction.mp4"
+                },
+                {
+                    "id": 2221116,
+                    "name": "\u5de5\u85e4 \u502b\u5b50",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221116_good_loop.mp4",
+                    "reaction_movie": "2221116_good_reaction.mp4"
+                },
+                {
+                    "id": 2221118,
+                    "name": "\u897f\u57ce \u78a7\u6cc9",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221118_good_loop.mp4",
+                    "reaction_movie": "2221118_good_reaction.mp4"
+                },
+                {
+                    "id": 2221119,
+                    "name": "\u9f4b\u85e4 \u5f69\u82b1",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221119_good_loop.mp4",
+                    "reaction_movie": "2221119_good_reaction.mp4"
+                },
+                {
+                    "id": 2221120,
+                    "name": "\u9f4a\u85e4 \u5927\u6210",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221120_good_loop.mp4",
+                    "reaction_movie": "2221120_good_reaction.mp4"
+                },
+                {
+                    "id": 2221122,
+                    "name": "\u4f50\u3005\u6728 \u82f1\u91cc",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221122_good_loop.mp4",
+                    "reaction_movie": "2221122_good_reaction.mp4"
+                },
+                {
+                    "id": 2221124,
+                    "name": "\u4f50\u85e4 \u6d77\u97f3",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221124_good_loop.mp4",
+                    "reaction_movie": "2221124_good_reaction.mp4"
+                },
+                {
+                    "id": 2221126,
+                    "name": "\u4f50\u85e4 \u67da\u5e0c",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221126_good_loop.mp4",
+                    "reaction_movie": "2221126_good_reaction.mp4"
+                },
+                {
+                    "id": 2221128,
+                    "name": "\u4e0b\u7530 \u7f8e\u54b2",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221128_good_loop.mp4",
+                    "reaction_movie": "2221128_good_reaction.mp4"
+                },
+                {
+                    "id": 2221129,
+                    "name": "\u767d\u5ca9 \u99ff\u6597",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221129_good_loop.mp4",
+                    "reaction_movie": "2221129_good_reaction.mp4"
+                },
+                {
+                    "id": 2221131,
+                    "name": "\u9234\u6728 \u5065\u6597",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221131_good_loop.mp4",
+                    "reaction_movie": "2221131_good_reaction.mp4"
+                },
+                {
+                    "id": 2221133,
+                    "name": "\u9ad8\u6a4b \u79f0\u5927",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221133_good_loop.mp4",
+                    "reaction_movie": "2221133_good_reaction.mp4"
+                },
+                {
+                    "id": 2221134,
+                    "name": "\u9ad8\u6a4b \u670b\u4e5f",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221134_good_loop.mp4",
+                    "reaction_movie": "2221134_good_reaction.mp4"
+                },
+                {
+                    "id": 2221135,
+                    "name": "\u9ad8\u6a4b \u60a0",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221135_good_loop.mp4",
+                    "reaction_movie": "2221135_good_reaction.mp4"
+                },
+                {
+                    "id": 2221136,
+                    "name": "\u7af9\u5185 \u65e5\u83dc",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221136_good_loop.mp4",
+                    "reaction_movie": "2221136_good_reaction.mp4"
+                },
+                {
+                    "id": 2221137,
+                    "name": "\u6b66\u7530 \u7dba\u97f3",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221137_good_loop.mp4",
+                    "reaction_movie": "2221137_good_reaction.mp4"
+                },
+                {
+                    "id": 2221138,
+                    "name": "\u7530\u6751 \u9752\u7a7a",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221138_good_loop.mp4",
+                    "reaction_movie": "2221138_good_reaction.mp4"
+                },
+                {
+                    "id": 2221139,
+                    "name": "\u9577\u4e95 \u5553\u592a",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221139_good_loop.mp4",
+                    "reaction_movie": "2221139_good_reaction.mp4"
+                },
+                {
+                    "id": 2221140,
+                    "name": "\u897f \u96c4\u4e00\u90ce",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221140_good_loop.mp4",
+                    "reaction_movie": "2221140_good_reaction.mp4"
+                },
+                {
+                    "id": 2221141,
+                    "name": "\u6797 \u51ac\u771f",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221141_good_loop.mp4",
+                    "reaction_movie": "2221141_good_reaction.mp4"
+                },
+                {
+                    "id": 2221142,
+                    "name": "\u5e73\u6afb \u61b2\u6597",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221142_good_loop.mp4",
+                    "reaction_movie": "2221142_good_reaction.mp4"
+                },
+                {
+                    "id": 2221143,
+                    "name": "\u5897\u7530 \u7950\u5f25",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221143_good_loop.mp4",
+                    "reaction_movie": "2221143_good_reaction.mp4"
+                },
+                {
+                    "id": 2221144,
+                    "name": "\u677e\u7530 \u967d\u83dc",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221144_good_loop.mp4",
+                    "reaction_movie": "2221144_good_reaction.mp4"
+                },
+                {
+                    "id": 2221146,
+                    "name": "\u6e4a \u9ebb\u7dbe",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221146_good_loop.mp4",
+                    "reaction_movie": "2221146_good_reaction.mp4"
+                },
+                {
+                    "id": 2221148,
+                    "name": "\u5b89\u7530 \u54b2\u5e0c",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221148_good_loop.mp4",
+                    "reaction_movie": "2221148_good_reaction.mp4"
+                },
+                {
+                    "id": 2221149,
+                    "name": "\u5c71\u5185 \u77b3",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221149_good_loop.mp4",
+                    "reaction_movie": "2221149_good_reaction.mp4"
+                },
+                {
+                    "id": 2221150,
+                    "name": "\u5c71\u672c \u7f8e\u91cc",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221150_good_loop.mp4",
+                    "reaction_movie": "2221150_good_reaction.mp4"
+                },
+                {
+                    "id": 2221202,
+                    "name": "\u963f\u90e8 \u5ba5\u611b",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221202_good_loop.mp4",
+                    "reaction_movie": "2221202_good_reaction.mp4"
+                },
+                {
+                    "id": 2221203,
+                    "name": "\u4f0a\u85e4 \u84bc\u7a7a",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221203_good_loop.mp4",
+                    "reaction_movie": "2221203_good_reaction.mp4"
+                },
+                {
+                    "id": 2221204,
+                    "name": "\u4f0a\u85e4 \u6d0b\u592a\u6717",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221204_good_loop.mp4",
+                    "reaction_movie": "2221204_good_reaction.mp4"
+                },
+                {
+                    "id": 2221205,
+                    "name": "\u4eca\u4e95 \u9065\u540d",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221205_good_loop.mp4",
+                    "reaction_movie": "2221205_good_reaction.mp4"
+                },
+                {
+                    "id": 2221206,
+                    "name": "\u592a\u7530 \u601c\u90a3",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221206_good_loop.mp4",
+                    "reaction_movie": "2221206_good_reaction.mp4"
+                },
+                {
+                    "id": 2221211,
+                    "name": "\u52a0\u85e4 \u3081\u3050\u307f",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221211_good_loop.mp4",
+                    "reaction_movie": "2221211_good_reaction.mp4"
+                },
+                {
+                    "id": 2221215,
+                    "name": "\u6adb\u5f15 \u65e5\u83dc",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221215_good_loop.mp4",
+                    "reaction_movie": "2221215_good_reaction.mp4"
+                },
+                {
+                    "id": 2221217,
+                    "name": "\u4e45\u4fdd\u6ca2 \u96db",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221217_good_loop.mp4",
+                    "reaction_movie": "2221217_good_reaction.mp4"
+                },
+                {
+                    "id": 2221219,
+                    "name": "\u897f\u689d \u3042\u304b\u308a",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221219_good_loop.mp4",
+                    "reaction_movie": "2221219_good_reaction.mp4"
+                },
+                {
+                    "id": 2221220,
+                    "name": "\u9f4b\u85e4 \u5968\u771f",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221220_good_loop.mp4",
+                    "reaction_movie": "2221220_good_reaction.mp4"
+                },
+                {
+                    "id": 2221221,
+                    "name": "\u9f4b\u85e4 \u7406\u592e",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221221_good_loop.mp4",
+                    "reaction_movie": "2221221_good_reaction.mp4"
+                },
+                {
+                    "id": 2221222,
+                    "name": "\u4f50\u3005\u6728 \u5f69\u4e43",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221222_good_loop.mp4",
+                    "reaction_movie": "2221222_good_reaction.mp4"
+                },
+                {
+                    "id": 2221224,
+                    "name": "\u4f50\u7af9 \u3082\u3082\u306f",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221224_good_loop.mp4",
+                    "reaction_movie": "2221224_good_reaction.mp4"
+                },
+                {
+                    "id": 2221226,
+                    "name": "\u4f50\u85e4 \u96ea\u4e43",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221226_good_loop.mp4",
+                    "reaction_movie": "2221226_good_reaction.mp4"
+                },
+                {
+                    "id": 2221230,
+                    "name": "\u83c5\u539f \u5fd7\u9580",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221230_good_loop.mp4",
+                    "reaction_movie": "2221230_good_reaction.mp4"
+                },
+                {
+                    "id": 2221231,
+                    "name": "\u9234\u6728 \u304f\u308b\u307f",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221231_good_loop.mp4",
+                    "reaction_movie": "2221231_good_reaction.mp4"
+                },
+                {
+                    "id": 2221235,
+                    "name": "\u9ad8\u6a4b \u5357\u6ce2",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221235_good_loop.mp4",
+                    "reaction_movie": "2221235_good_reaction.mp4"
+                },
+                {
+                    "id": 2221236,
+                    "name": "\u9ad8\u67f3 \u98a8\u51b4",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221236_good_loop.mp4",
+                    "reaction_movie": "2221236_good_reaction.mp4"
+                },
+                {
+                    "id": 2221237,
+                    "name": "\u6b66\u5185 \u96c4\u592a",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221237_good_loop.mp4",
+                    "reaction_movie": "2221237_good_reaction.mp4"
+                },
+                {
+                    "id": 2221242,
+                    "name": "\u6771\u91ce \u4f91\u5b63",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221242_good_loop.mp4",
+                    "reaction_movie": "2221242_good_reaction.mp4"
+                },
+                {
+                    "id": 2221244,
+                    "name": "\u677e\u5d0e \u5e0c\u671b",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221244_good_loop.mp4",
+                    "reaction_movie": "2221244_good_reaction.mp4"
+                },
+                {
+                    "id": 2221247,
+                    "name": "\u5bae\u5185 \u84bc\u751f",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221247_good_loop.mp4",
+                    "reaction_movie": "2221247_good_reaction.mp4"
+                },
+                {
+                    "id": 2221248,
+                    "name": "\u76ee\u9ed2 \u9999\u51dc",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221248_good_loop.mp4",
+                    "reaction_movie": "2221248_good_reaction.mp4"
+                },
+                {
+                    "id": 2221250,
+                    "name": "\u5c71\u53e3 \u54b2",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221250_good_loop.mp4",
+                    "reaction_movie": "2221250_good_reaction.mp4"
+                },
+                {
+                    "id": 2221251,
+                    "name": "\u7d50\u57ce \u6625\u83dc",
+                    "type": "good",
+                    "type_label": "\u3088\u3044\u4e88\u611f",
+                    "loop_movie": "2221251_good_loop.mp4",
+                    "reaction_movie": "2221251_good_reaction.mp4"
+                }
+            ]
+
+ </script>
+    <script src="main.js"></script>
+</body>
+
+</html>

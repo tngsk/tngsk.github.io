@@ -1,0 +1,498 @@
+[
+    {
+        "id": 2221102,
+        "name": "\u77f3\u5c71 \u7f8e\u82b1",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221102_bad_loop.mp4",
+        "reaction_movie": "2221102_bad_reaction.mp4"
+    },
+    {
+        "id": 2221105,
+        "name": "\u53ca\u5ddd \u96c4\u5927",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221105_bad_loop.mp4",
+        "reaction_movie": "2221105_bad_reaction.mp4"
+    },
+    {
+        "id": 2221108,
+        "name": "\u5c3e\u5f62 \u512a\u751f",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221108_bad_loop.mp4",
+        "reaction_movie": "2221108_bad_reaction.mp4"
+    },
+    {
+        "id": 2221109,
+        "name": "\u52a0\u85e4 \u9e97",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221109_bad_loop.mp4",
+        "reaction_movie": "2221109_bad_reaction.mp4"
+    },
+    {
+        "id": 2221112,
+        "name": "\u52a0\u8302 \u51dc\u3005\u5b50",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221112_bad_loop.mp4",
+        "reaction_movie": "2221112_bad_reaction.mp4"
+    },
+    {
+        "id": 2221113,
+        "name": "\u5ddd\u6751 \u548c",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221113_bad_loop.mp4",
+        "reaction_movie": "2221113_bad_reaction.mp4"
+    },
+    {
+        "id": 2221114,
+        "name": "\u4e45\u4e0b \u590f\u5b9f",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221114_bad_loop.mp4",
+        "reaction_movie": "2221114_bad_reaction.mp4"
+    },
+    {
+        "id": 2221116,
+        "name": "\u5de5\u85e4 \u502b\u5b50",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221116_bad_loop.mp4",
+        "reaction_movie": "2221116_bad_reaction.mp4"
+    },
+    {
+        "id": 2221118,
+        "name": "\u897f\u57ce \u78a7\u6cc9",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221118_bad_loop.mp4",
+        "reaction_movie": "2221118_bad_reaction.mp4"
+    },
+    {
+        "id": 2221119,
+        "name": "\u9f4b\u85e4 \u5f69\u82b1",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221119_bad_loop.mp4",
+        "reaction_movie": "2221119_bad_reaction.mp4"
+    },
+    {
+        "id": 2221120,
+        "name": "\u9f4a\u85e4 \u5927\u6210",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221120_bad_loop.mp4",
+        "reaction_movie": "2221120_bad_reaction.mp4"
+    },
+    {
+        "id": 2221122,
+        "name": "\u4f50\u3005\u6728 \u82f1\u91cc",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221122_bad_loop.mp4",
+        "reaction_movie": "2221122_bad_reaction.mp4"
+    },
+    {
+        "id": 2221124,
+        "name": "\u4f50\u85e4 \u6d77\u97f3",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221124_bad_loop.mp4",
+        "reaction_movie": "2221124_bad_reaction.mp4"
+    },
+    {
+        "id": 2221126,
+        "name": "\u4f50\u85e4 \u67da\u5e0c",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221126_bad_loop.mp4",
+        "reaction_movie": "2221126_bad_reaction.mp4"
+    },
+    {
+        "id": 2221128,
+        "name": "\u4e0b\u7530 \u7f8e\u54b2",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221128_bad_loop.mp4",
+        "reaction_movie": "2221128_bad_reaction.mp4"
+    },
+    {
+        "id": 2221129,
+        "name": "\u767d\u5ca9 \u99ff\u6597",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221129_bad_loop.mp4",
+        "reaction_movie": "2221129_bad_reaction.mp4"
+    },
+    {
+        "id": 2221131,
+        "name": "\u9234\u6728 \u5065\u6597",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221131_bad_loop.mp4",
+        "reaction_movie": "2221131_bad_reaction.mp4"
+    },
+    {
+        "id": 2221133,
+        "name": "\u9ad8\u6a4b \u79f0\u5927",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221133_bad_loop.mp4",
+        "reaction_movie": "2221133_bad_reaction.mp4"
+    },
+    {
+        "id": 2221134,
+        "name": "\u9ad8\u6a4b \u670b\u4e5f",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221134_bad_loop.mp4",
+        "reaction_movie": "2221134_bad_reaction.mp4"
+    },
+    {
+        "id": 2221135,
+        "name": "\u9ad8\u6a4b \u60a0",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221135_bad_loop.mp4",
+        "reaction_movie": "2221135_bad_reaction.mp4"
+    },
+    {
+        "id": 2221136,
+        "name": "\u7af9\u5185 \u65e5\u83dc",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221136_bad_loop.mp4",
+        "reaction_movie": "2221136_bad_reaction.mp4"
+    },
+    {
+        "id": 2221137,
+        "name": "\u6b66\u7530 \u7dba\u97f3",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221137_bad_loop.mp4",
+        "reaction_movie": "2221137_bad_reaction.mp4"
+    },
+    {
+        "id": 2221138,
+        "name": "\u7530\u6751 \u9752\u7a7a",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221138_bad_loop.mp4",
+        "reaction_movie": "2221138_bad_reaction.mp4"
+    },
+    {
+        "id": 2221139,
+        "name": "\u9577\u4e95 \u5553\u592a",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221139_bad_loop.mp4",
+        "reaction_movie": "2221139_bad_reaction.mp4"
+    },
+    {
+        "id": 2221140,
+        "name": "\u897f \u96c4\u4e00\u90ce",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221140_bad_loop.mp4",
+        "reaction_movie": "2221140_bad_reaction.mp4"
+    },
+    {
+        "id": 2221141,
+        "name": "\u6797 \u51ac\u771f",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221141_bad_loop.mp4",
+        "reaction_movie": "2221141_bad_reaction.mp4"
+    },
+    {
+        "id": 2221142,
+        "name": "\u5e73\u6afb \u61b2\u6597",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221142_bad_loop.mp4",
+        "reaction_movie": "2221142_bad_reaction.mp4"
+    },
+    {
+        "id": 2221143,
+        "name": "\u5897\u7530 \u7950\u5f25",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221143_bad_loop.mp4",
+        "reaction_movie": "2221143_bad_reaction.mp4"
+    },
+    {
+        "id": 2221144,
+        "name": "\u677e\u7530 \u967d\u83dc",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221144_bad_loop.mp4",
+        "reaction_movie": "2221144_bad_reaction.mp4"
+    },
+    {
+        "id": 2221146,
+        "name": "\u6e4a \u9ebb\u7dbe",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221146_bad_loop.mp4",
+        "reaction_movie": "2221146_bad_reaction.mp4"
+    },
+    {
+        "id": 2221148,
+        "name": "\u5b89\u7530 \u54b2\u5e0c",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221148_bad_loop.mp4",
+        "reaction_movie": "2221148_bad_reaction.mp4"
+    },
+    {
+        "id": 2221149,
+        "name": "\u5c71\u5185 \u77b3",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221149_bad_loop.mp4",
+        "reaction_movie": "2221149_bad_reaction.mp4"
+    },
+    {
+        "id": 2221150,
+        "name": "\u5c71\u672c \u7f8e\u91cc",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221150_bad_loop.mp4",
+        "reaction_movie": "2221150_bad_reaction.mp4"
+    },
+    {
+        "id": 2221152,
+        "name": "\u6e21\u8fba \u7531\u82bd",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221152_bad_loop.mp4",
+        "reaction_movie": "2221152_bad_reaction.mp4"
+    },
+    {
+        "id": 2221201,
+        "name": "\u6d45\u91ce \u7d50\u611b",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221201_bad_loop.mp4",
+        "reaction_movie": "2221201_bad_reaction.mp4"
+    },
+    {
+        "id": 2221202,
+        "name": "\u963f\u90e8 \u5ba5\u611b",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221202_bad_loop.mp4",
+        "reaction_movie": "2221202_bad_reaction.mp4"
+    },
+    {
+        "id": 2221203,
+        "name": "\u4f0a\u85e4 \u84bc\u7a7a",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221203_bad_loop.mp4",
+        "reaction_movie": "2221203_bad_reaction.mp4"
+    },
+    {
+        "id": 2221204,
+        "name": "\u4f0a\u85e4 \u6d0b\u592a\u6717",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221204_bad_loop.mp4",
+        "reaction_movie": "2221204_bad_reaction.mp4"
+    },
+    {
+        "id": 2221205,
+        "name": "\u4eca\u4e95 \u9065\u540d",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221205_bad_loop.mp4",
+        "reaction_movie": "2221205_bad_reaction.mp4"
+    },
+    {
+        "id": 2221206,
+        "name": "\u592a\u7530 \u601c\u90a3",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221206_bad_loop.mp4",
+        "reaction_movie": "2221206_bad_reaction.mp4"
+    },
+    {
+        "id": 2221211,
+        "name": "\u52a0\u85e4 \u3081\u3050\u307f",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221211_bad_loop.mp4",
+        "reaction_movie": "2221211_bad_reaction.mp4"
+    },
+    {
+        "id": 2221215,
+        "name": "\u6adb\u5f15 \u65e5\u83dc",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221215_bad_loop.mp4",
+        "reaction_movie": "2221215_bad_reaction.mp4"
+    },
+    {
+        "id": 2221216,
+        "name": "\u5de5\u85e4 \u68a8\u5e06\u5b50",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221216_bad_loop.mp4",
+        "reaction_movie": "2221216_bad_reaction.mp4"
+    },
+    {
+        "id": 2221217,
+        "name": "\u4e45\u4fdd\u6ca2 \u96db",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221217_bad_loop.mp4",
+        "reaction_movie": "2221217_bad_reaction.mp4"
+    },
+    {
+        "id": 2221218,
+        "name": "\u4eca\u91ce \u4f38\u4e8c",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221218_bad_loop.mp4",
+        "reaction_movie": "2221218_bad_reaction.mp4"
+    },
+    {
+        "id": 2221219,
+        "name": "\u897f\u689d \u3042\u304b\u308a",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221219_bad_loop.mp4",
+        "reaction_movie": "2221219_bad_reaction.mp4"
+    },
+    {
+        "id": 2221220,
+        "name": "\u9f4b\u85e4 \u5968\u771f",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221220_bad_loop.mp4",
+        "reaction_movie": "2221220_bad_reaction.mp4"
+    },
+    {
+        "id": 2221221,
+        "name": "\u9f4b\u85e4 \u7406\u592e",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221221_bad_loop.mp4",
+        "reaction_movie": "2221221_bad_reaction.mp4"
+    },
+    {
+        "id": 2221224,
+        "name": "\u4f50\u7af9 \u3082\u3082\u306f",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221224_bad_loop.mp4",
+        "reaction_movie": "2221224_bad_reaction.mp4"
+    },
+    {
+        "id": 2221226,
+        "name": "\u4f50\u85e4 \u96ea\u4e43",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221226_bad_loop.mp4",
+        "reaction_movie": "2221226_bad_reaction.mp4"
+    },
+    {
+        "id": 2221228,
+        "name": "\u5b8d\u6238 \u7d50",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221228_bad_loop.mp4",
+        "reaction_movie": "2221228_bad_reaction.mp4"
+    },
+    {
+        "id": 2221230,
+        "name": "\u83c5\u539f \u5fd7\u9580",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221230_bad_loop.mp4",
+        "reaction_movie": "2221230_bad_reaction.mp4"
+    },
+    {
+        "id": 2221231,
+        "name": "\u9234\u6728 \u304f\u308b\u307f",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221231_bad_loop.mp4",
+        "reaction_movie": "2221231_bad_reaction.mp4"
+    },
+    {
+        "id": 2221235,
+        "name": "\u9ad8\u6a4b \u5357\u6ce2",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221235_bad_loop.mp4",
+        "reaction_movie": "2221235_bad_reaction.mp4"
+    },
+    {
+        "id": 2221236,
+        "name": "\u9ad8\u67f3 \u98a8\u51b4",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221236_bad_loop.mp4",
+        "reaction_movie": "2221236_bad_reaction.mp4"
+    },
+    {
+        "id": 2221237,
+        "name": "\u6b66\u5185 \u96c4\u592a",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221237_bad_loop.mp4",
+        "reaction_movie": "2221237_bad_reaction.mp4"
+    },
+    {
+        "id": 2221242,
+        "name": "\u6771\u91ce \u4f91\u5b63",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221242_bad_loop.mp4",
+        "reaction_movie": "2221242_bad_reaction.mp4"
+    },
+    {
+        "id": 2221244,
+        "name": "\u677e\u5d0e \u5e0c\u671b",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221244_bad_loop.mp4",
+        "reaction_movie": "2221244_bad_reaction.mp4"
+    },
+    {
+        "id": 2221247,
+        "name": "\u5bae\u5185 \u84bc\u751f",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221247_bad_loop.mp4",
+        "reaction_movie": "2221247_bad_reaction.mp4"
+    },
+    {
+        "id": 2221248,
+        "name": "\u76ee\u9ed2 \u9999\u51dc",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221248_bad_loop.mp4",
+        "reaction_movie": "2221248_bad_reaction.mp4"
+    },
+    {
+        "id": 2221250,
+        "name": "\u5c71\u53e3 \u54b2",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221250_bad_loop.mp4",
+        "reaction_movie": "2221250_bad_reaction.mp4"
+    },
+    {
+        "id": 2221251,
+        "name": "\u7d50\u57ce \u6625\u83dc",
+        "type": "bad",
+        "type_label": "\u308f\u308b\u3044\u4e88\u611f",
+        "loop_movie": "2221251_bad_loop.mp4",
+        "reaction_movie": "2221251_bad_reaction.mp4"
+    }
+]
