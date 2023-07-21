@@ -7,7 +7,7 @@ let playList;
 let info;
 
 let count = 0;
-const max_repeat = 0;
+const max_repeat = 30;
 
 const fileDir = "./files/";
 
