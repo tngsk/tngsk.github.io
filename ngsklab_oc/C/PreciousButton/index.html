@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>preciousbutton</title>
+</head>
+
+<body>
+    <style>
+        body {
+            background-image: url(./oshi_gazou.png);
+            background-size: cover;
+            width: 100%;
+            height: 100%;
+            position: center;
+        }
+
+        html {
+            width: 100%;
+            height: 100vh;
+        }
+
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .HA {
+            width: 100px;
+            position: absolute;
+            animation: fadeOut 0.3s ease 0.3s 1 normal;
+        }
+
+        @keyframes fadeOut {
+            100% {
+                opacity: 0;
+            }
+
+            0% {
+                opacity: 1;
+            }
+        }
+    </style>
+    <div id="word" class="word01"></div>
+    <script>
+        const word = document.getElementById("HA")
+        const list = {
+            16: "Money.png",
+            20: "muri01.png",
+            48: "Big.png",
+            49: "toutoi.png",
+            50: "Oyanokao.png",
+            51: "hisuki.png",
+            52: "a.png",
+            53: "HA.png",
+            54: "ikite.png",
+            55: "rikai.png",
+            56: "Saikou.png",
+            57: "tada.png",
+            65: "HA.png",
+            66: "Saikou.png",
+            67: "kaogaii.png",
+            68: "Douki.png",
+            69: "shinu.png",
+            70: "kiitenai.png",
+            71: "Sutaobe.png",
+            72: "toutoi.png",
+            73: "Suki.png",
+            74: "kawaii.png",
+            75: "Oshi02.png",
+            76: "Daugoukyuu.png",
+            77: "Shinzou.png",
+            78: "Shindoi.png",
+            79: "tyotomate.png",
+            81: "muri01.png",
+            80: "Win.png",
+            82: "Subarashii.png",
+            83: "agaaa.png",
+            84: "zetumei.png",
+            85: "toutoi.png",
+            86: "Yabai01.png",
+            87: "arigatou.png",
+            88: "ATM.png",
+            89: "Oshi01.png",
+            90: "Money.png",
+            186: "ikiru.png",
+            187: "Win.png",
+            188: "Big.png",
+            189: "Subarashii.png",
+            190: "hisuki.png",
+            191: "Yabai01.png",
+            219: "a.png",
+            221: "souiun.png",
+            222: "Shinzou.png",
+        }
+
+        document.body.addEventListener("keydown", (e) => {
+            console.log(e.keyCode)
+            const img_tagu = document.createElement('img');
+            img_tagu.src = "images/" + list[e.keyCode]
+            img_tagu.classList.add("HA")
+            const size = Math.floor(Math.random() * 500)
+            img_tagu.style.width = `${size}px`
+
+            const x = Math.floor(Math.random() * document.documentElement.clientWidth)
+            img_tagu.style.left = `${x}px`
+            const y = Math.floor(Math.random() * document.documentElement.clientHeight)
+            img_tagu.style.top = `${y}px`
+
+            const word = document.getElementById("word");
+            word.appendChild(img_tagu);
+
+            // 指定秒数で消す
+            setTimeout(() => {
+                img_tagu.remove();
+            }, 500)
+        })
+
+    </script>
+</body>
+</html>

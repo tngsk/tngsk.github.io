@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+textarea {
+        font-family: Arial, Helvetica, sans-serif;
+}
+
+textarea{
+    width: 50%;
+    height: 200px;
+    resize: vertical;
+    position: absolute;
+    top: 370px;
+    left: 350px;
+}
+
+
+textarea{
+    padding: 10px;
+    font-size: 20px;
+    color: black;
+}

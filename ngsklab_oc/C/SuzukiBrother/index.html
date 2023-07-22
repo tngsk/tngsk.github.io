@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <style>
+        .box{
+            width: 600px;
+            height: 600px;
+            background-color: rgb(255, 255, 255);
+            /* position: absolute; */
+            margin: 0 auto;
+            margin-top: -120px;
+        }
+    
+        .suzuki1{
+            background-image:url(image/kotarou_3.png) ; background-repeat:no-repeat; background-position:center;
+        }
+
+        .suzuki2{
+            background-image:url(image/kotarou_4.png) ;background-repeat:no-repeat; background-position:center;
+        }
+
+        
+        .suzuki3{
+            background-image:url(image/kotarou_5.png) ;background-repeat:no-repeat; background-position:center;
+        }
+        
+
+
+        .suzuki4{
+            background-image:url(image/kotarou_6.png) ;background-repeat:no-repeat; background-position:center;
+        }
+        
+
+
+        .suzuki5{
+            background-image:url(image/kotarou_7.png) ;background-repeat:no-repeat; background-position:center;
+        }
+        
+
+        .suzuki6{
+            background-image:url(image/kotarou_8.png) ;background-repeat:no-repeat; background-position:center;
+        }
+
+        .suzuki7{
+            background-image:url(image/kotarou_9.png) ;background-repeat:no-repeat; background-position:center;
+        }
+
+        .suzuki8{
+            background-image:url(image/kotarou_2.png) ;background-repeat:no-repeat; background-position:center;
+        }
+
+        .suzuki9{
+            background-image:url(image/kotarou_1.png) ;background-repeat:no-repeat; background-position:center;
+        }
+
+       
+        </style>
+        
+        <div id="tomato" class="box"></div>
+    
+        <div><textarea id="kousi"  style="background: transparent;" name="tarea1" cols="100" rows="10" maxlength="3000" wrap="hard" onkeyup="change(value),kani(value)">メモ</textarea>
+<p id="ebi" >0文字</p>
+        </div>
+   
+
+    <script>
+    function kani(a){
+        document.getElementById("ebi").innerHTML=a.length+"文字"
+    }
+
+    const tagu=document.getElementById("tomato")
+
+    function change(a){
+            if(a.length>=10)
+            tagu.classList.add("suzuki1")
+            if(a.length==20)
+            tagu.classList.add("suzuki2")
+            if(a.length==30)
+            tagu.classList.add("suzuki3")
+            if(a.length==40)
+            tagu.classList.add("suzuki4")
+            if(a.length==50)
+            tagu.classList.add("suzuki5")
+            if(a.length==60)
+            tagu.classList.add("suzuki6")
+            if(a.length==70)
+            tagu.classList.add("suzuki7")
+            if(a.length==80)
+            tagu.classList.add("suzuki8")
+            if(a.length==90)
+            tagu.classList.add("suzuki9")
+        }
+    
+
+    
+
+    
+    
+    </script>
+
+<!-- <input type="text" id="name" name="name" required
+minlength="1000" maxlength="1000" size="100"> -->
+
+</body>
+
+</html> 

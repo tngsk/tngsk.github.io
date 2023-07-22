@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 音を鳴らすためのライブラリを読み込む -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
+    <!-- ここまで -->
+
+    <style>
+        .box {
+            width: 100%;
+            height: 100%;
+            background-color: white;
+        }
+
+        .div {
+            animation: 1s xxx;
+        }
+
+        .night {
+            width: 100%;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <button class="btn" id="start_btn">オーディオ開始</button>
+
+    <img src="white.png" class="night" alt="" id="A">
+    <img src="white.png" class="night" alt="" id="B">
+    <img src="white.png" class="night" alt="" id="C">
+    <img src="white.png" class="night" alt="" id="D">
+    <img src="white.png" class="night" alt="" id="E">
+    <img src="white.png" class="night" alt="" id="F">
+    <img src="white.png" class="night" alt="" id="G">
+    <img src="white.png" class="night" alt="" id="H">
+    <img src="white.png" class="night" alt="" id="I">
+    <img src="white.png" class="night" alt="" id="J">
+    <img src="white.png" class="night" alt="" id="K">
+    <img src="white.png" class="night" alt="" id="L">
+    <img src="white.png" class="night" alt="" id="M">
+    <img src="white.png" class="night" alt="" id="N">
+    <img src="white.png" class="night" alt="" id="O">
+    <img src="white.png" class="night" alt="" id="P">
+    <img src="white.png" class="night" alt="" id="Q">
+    <img src="white.png" class="night" alt="" id="R">
+    <img src="white.png" class="night" alt="" id="S">
+    <img src="white.png" class="night" alt="" id="T">
+    <img src="white.png" class="night" alt="" id="U">
+    <img src="white.png" class="night" alt="" id="V">
+    <img src="white.png" class="night" alt="" id="W">
+    <img src="white.png" class="night" alt="" id="X">
+    <img src="white.png" class="night" alt="" id="Y">
+    <img src="white.png" class="night" alt="" id="Z">
+    <img src="white.png" class="night" alt="" id="0">
+    <img src="white.png" class="night" alt="" id="1">
+    <img src="white.png" class="night" alt="" id="2">
+    <img src="white.png" class="night" alt="" id="3">
+    <img src="white.png" class="night" alt="" id="4">
+    <img src="white.png" class="night" alt="" id="5">
+    <img src="white.png" class="night" alt="" id="6">
+    <img src="white.png" class="night" alt="" id="7">
+    <img src="white.png" class="night" alt="" id="8">
+    <img src="white.png" class="night" alt="" id="9">
+
+    <script>
+
+        const list = {
+            65: "A"
+            , 66: "B"
+            , 67: "C"
+            , 68: "D"
+            , 69: "E"
+            , 70: "F"
+            , 71: "G"
+            , 72: "H"
+            , 73: "I"
+            , 74: "J"
+            , 75: "K"
+            , 76: "L"
+            , 77: "M"
+            , 78: "N"
+            , 79: "O"
+            , 80: "P"
+            , 81: "Q"
+            , 82: "R"
+            , 83: "S"
+            , 84: "T"
+            , 85: "U"
+            , 86: "V"
+            , 87: "W"
+            , 88: "X"
+            , 89: "Y"
+            , 90: "Z"
+            , 48: "0"
+            , 49: "1"
+            , 50: "2"
+            , 51: "3"
+            , 52: "4"
+            , 53: "5"
+            , 54: "6"
+            , 55: "7"
+            , 56: "8"
+            , 57: "9"
+        }
+
+        // サンプル（音のファイル）をピアノの鍵盤ひとつひとつに割り当てる
+        const samples = {
+            "C4": "BGM.mp3",
+        };
+        // おもちゃのピアノとして構築する
+        const toy_piano = new Tone.Sampler(samples).toDestination();
+
+        // オーディオ開始ボタン
+        const start_btn = document.getElementById('start_btn');
+        start_btn.addEventListener('click', async () => {
+            await Tone.start();
+            start_btn.style.display = "none"
+        })
+
+
+        let tag_count = 0;
+        let array = Object.values(list);
+        let tag_max = array.length
+        let oto_flag = true
+
+        let ad = new Audio("BGM.mp3");
+
+
+        addEventListener("keydown", keydownfunc);
+
+        function keydownfunc(event) {
+
+            // 音ならす
+            if (oto_flag) {
+                ad.play(); ad.loop = true;
+                oto_flag = false
+            }
+
+            let key_code = event.keyCode;
+            console.log("key code " + key_code);
+
+            let img = document.getElementById(list[key_code]);
+
+            let imgs = document.getElementsByClassName('night')
+
+            let i = Math.floor(Math.random() * array.length)
+            let gazou = array[i]
+            const target = imgs[tag_count]
+            target.src = "image/" + gazou + ".png";
+
+            target.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 2000, fill: 'forwards' });
+            setTimeout(() => {
+                target.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 2000, fill: 'forwards' });
+            }, 2000)
+
+            array.splice(i, 1);
+            tag_count++;
+            if (tag_count >= tag_max) {
+                tag_count = 0;
+                array = Object.values(list);
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

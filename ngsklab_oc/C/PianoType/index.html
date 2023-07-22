@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+	<script src="jquery.ripples-min.js"></script>
+	<title>Document</title>
+	<link rel="stylesheet" href="style.css">
+
+	<!-- 音を鳴らすためのライブラリを読み込む -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
+	<!-- ここまで -->
+
+</head>
+
+
+<!-- 背景画像 -->
+
+<body>
+	<style>
+		* {
+			margin: 0px;
+			padding: 0px;
+		}
+
+		html {
+			width: 100%;
+			height: 100vh;
+		}
+
+		body {
+			width: 100%;
+			height: 100%;
+			background-image: url(paper1.jpg);
+			background-size: cover;
+		}
+	</style>
+	<!-- ここまで -->
+
+
+
+
+
+
+
+	<body>
+
+		<button class="btn" id="start_btn">sound</button>
+
+		<div class="box" id="cat1"></div>
+		<div class="box" id="cat2"></div>
+
+		<script>
+
+			// サンプラー
+			// サンプル（音のファイル）をピアノの鍵盤ひとつひとつに割り当てる
+			const samples = {
+				"C4": "sounds/piano1.mp3",
+				"D4": "sounds/piano2.mp3",
+				"E4": "sounds/piano3.mp3",
+				"F4": "sounds/piano5.mp3",
+				"G4": "sounds/piano6.mp3",
+				"A4": "sounds/piano8.wav",
+				"B4": "sounds/piano8.wav",
+				"C5": "sounds/piano8.wav",
+				"D5": "sounds/piano8.wav",
+				"E5": "sounds/piano8.wav",
+				"F5": "sounds/piano8.wav",
+				"G5": "sounds/piano8.wav",
+			};
+			// おもちゃのピアノとして構築する
+			const toy_piano = new Tone.Sampler(samples).toDestination();
+
+			// オーディオ開始ボタン
+			const start_btn = document.getElementById('start_btn');
+			start_btn.addEventListener('click', async () => {
+				await Tone.start();
+			})
+
+			// 音を鳴らす
+			// 猫画像のタグを特定する
+			const cat1 = document.getElementById('cat1')
+			cat1.addEventListener('click', () => {
+				toy_piano.triggerAttackRelease("C4", 1000);
+			})
+
+
+
+			// 猫画像のタグを特定する
+			const cat2 = document.getElementById('cat2')
+
+			// タグに対してクリックイベントを追加する
+			document.body.addEventListener('keydown', (e) => {
+				// ランダムに音を鳴らす
+				const keys = Object.keys(samples)
+				// → ピアノ鍵盤のリスト["C4","D4","E4","F4","G4"]が出来上がる
+				const random_number = Math.floor(Math.random() * keys.length)
+				// → 設定したサンプルの個数を考慮して、ランダムな数字を決める
+				const note = keys[random_number]
+				// → ランダムな数字を元に、ピアノ鍵盤を決める
+				toy_piano.triggerAttackRelease(note, 1000);
+
+				console.log(e.keyCode)
+				if (e.keyCode == 65) {
+					// 決まった鍵盤を弾く
+
+				}
+
+
+
+			})
+
+
+
+		</script>
+
+	</body>
+
+
+
+
+
+
+	<!-- ドラムBGM -->
+	<audio src="sounds/drums.mp3" loop controls></audio>
+
+
+	<!-- テキストエリア -->
+	<textarea id="textarea" style="background-color: transparent;" name="tarea1" cols="100" rows="3" maxlength="3000"
+		wrap="hard" placeholder="母音だけ音が鳴ります。">文字を入力してください。</textarea>
+
+
+	<script>
+
+		$(function () {
+			var $textarea = $('#textarea');
+			var lineHeight = parseInt($textarea.css('lineHeight'));
+			$textarea.on('input', function (evt) {
+				var lines = ($(this).val() + '\n').match(/\n/g).length;
+				$(this).height(lineHeight * lines);
+			});
+			console.log($textarea)
+		});
+	</script>
+	<!-- ここまで -->
+
+</html>
