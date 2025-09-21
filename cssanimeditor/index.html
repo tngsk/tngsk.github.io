@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CSS Animation Simple Editor</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div class="main-container">
+            <div class="editor-panel">
+                <div class="tabs">
+                    <button class="tab" onclick="switchTab('html')">
+                        HTML
+                    </button>
+                    <button class="tab active" onclick="switchTab('css')">
+                        CSS
+                    </button>
+                    <button class="tab" onclick="switchTab('js')">JS</button>
+                    <button class="btn reset-btn" onclick="resetCode()">
+                        Reset
+                    </button>
+                </div>
+
+                <div class="editor-content">
+                    <textarea
+                        class="code-editor hidden"
+                        id="htmlEditor"
+                        spellcheck="false"
+                    ></textarea>
+
+                    <textarea
+                        class="code-editor"
+                        id="cssEditor"
+                        spellcheck="false"
+                    ></textarea>
+
+                    <textarea
+                        class="code-editor hidden"
+                        id="jsEditor"
+                        spellcheck="false"
+                    ></textarea>
+                </div>
+            </div>
+
+            <div class="preview-panel">
+                <iframe class="preview-frame" id="preview"></iframe>
+            </div>
+        </div>
+
+        <script src="templates.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>
