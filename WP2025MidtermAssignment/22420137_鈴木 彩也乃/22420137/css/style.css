@@ -1,0 +1,96 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* border: 1px solid red;  */
+}
+
+
+
+body{
+    padding: 2rem;
+    min-height: 100vh;
+    background-image: url('../img/sensu-gara.png');
+     background-size: cover; /* 画像を要素全体にフィット */
+    background-position: center; /* 中央に配置 */
+    background-repeat: no-repeat; 
+    color: #1c255c; 
+  font-family: "Kiwi Maru", serif;
+  font-weight: 400;
+  font-style: normal;
+
+  
+}
+
+
+.yoko{
+    display: flex;
+     gap: 0.3srem;
+    justify-content: center;
+    align-items: center; 
+}
+
+
+.item{
+    margin-left: auto;
+    margin-right: auto; 
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-direction: column; 
+    align-items: center;
+     flex: 1; 
+     padding: 0.5rem;
+}
+
+.item img {
+  max-width: 100%;
+  height: auto; /* 縦横比を保つ */
+} 
+
+ 
+
+main{
+    flex-direction: column;
+
+}
+
+.card{
+    background-color: rgb(208, 212, 250 );
+    margin: 4rem;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    text-align: center;
+    flex-direction: column;
+    opacity: 0.90;
+}
+
+.card2{
+    background-color: rgb(255, 255, 255);
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    text-align: center;
+    flex-direction: column;
+    opacity: 0.8;
+}
+
+.circle{
+    width: 100px;
+    height: 100px;
+    clip-path: circle(48%);
+object-fit: cover; /* 画像の比率を維持 */
+}
+
+.socials {
+    display: flex;
+    justify-content: center; /* 中央寄せ */
+    gap: 0.75rem; /* アイコン間の余白 */
+    
+ }
+
+ a {
+  color: #1c255c;
+}

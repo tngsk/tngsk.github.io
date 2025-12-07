@@ -1,0 +1,282 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    /* border: 1px solid red; */
+}
+
+body{
+    font-family:
+        "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans",
+        Meiryo, sans-serif;
+
+        --clr1: #ffffff;
+        --clr2: #00ffa6;
+        /*--解説--*/
+        /*--clr1 CSSのカスタムプロパティ（変数）
+        CSS内で使う色や数値を「名前をつけて保存している」状態であり、
+        このコードを書くことで保存され、使うときは var() で呼び出す*/
+        
+    padding: 2rem;
+    min-height: 100vh;
+
+    background-color: cover;
+    background: 
+    linear-gradient(#cccccc 1px, transparent 1px),
+    linear-gradient(90deg, #cccccc 1px, transparent 1px);
+  background-size: 20px 20px;
+
+    display: flex; 
+    flex-direction: column;
+    gap: 4rem;
+
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+/*--文字--*/
+
+.sacramento-regular{
+    font-family: "Fredericka the Great", fantasy;
+    font-weight: 400;
+    font-style: normal;
+}
+
+h1{
+    font-family: fantasy;
+    color: rgba(107, 9, 9, 0.911);
+    font-weight: 900;
+}
+
+h2 {
+    font-family: "Sacramento", cursive;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 2rem;
+    color: #666;
+}
+
+h3{
+    font-family: fantasy;
+    font-weight: 500;
+    
+}
+
+p{
+    color: #666;
+}
+
+
+
+img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.circle-clip {
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+}
+
+.icon {
+    width: 128px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* --レイアウト-- */
+.stack{
+    background-position: center;
+    object-fit: contain;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.stack>*+*{
+    margin-top: 1rem;
+}
+
+.title>*+*{
+    margin-top: 0.5rem;
+}
+/*--解説--*/
+/*--二つ目以降に適用(?)*/
+
+.center {
+    box-sizing: content-box;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    position: relative;
+}
+
+/* カードスタイル */
+.card{
+    background-color: white;
+    border-radius: 16px;
+/*--解説--*/
+/*--ボックスの角を丸くしている--*/
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 16px 32px rgba(0,0,0,0.2);
+}
+
+.bio {
+    font-weight: 200;
+}
+
+.socials {
+    color: #666;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.socials a {
+    width: 50px;
+    height: 30px;
+
+    background: rgba(255, 255, 255, 0.2);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.small-mini{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+    border-radius: 16px;
+    padding: 0.75rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+    background: linear-gradient(180deg, rgba(159, 93, 93, 0.6), rgba(255,255,255,0.9));
+}
+
+.item:nth-child(even) {
+    flex-direction: row-reverse;
+}
+/*--解説--*/
+/*--偶数のitem要素に適用--*/
+
+.text>*+*{
+    margin-top: 0.5rem;
+}
+
+.social-y {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.social-y a {
+    width: 50px;
+    height: 30px;
+
+    background: rgba(255, 255, 255, 0.2);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.column{
+    margin-top: 0;
+    display: block;
+    border-radius: 12px;
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.06);
+    flex: 0 0 42%;
+    /*--解説--*/
+    /*--flex-grow / flex-shrink / flex-basis の順番で指定--*/
+    /*--flex-grow	親の空きスペースがあっても 広がらない
+	　　flex-shrink	親要素が狭くなっても 縮まない
+　  　　flex-basis	要素の基本サイズを 親要素の42%に固定--*/
+}
+
+.item img {
+    display: block;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.text {
+    flex: 1 1 55%;
+    text-align: center;
+    padding: 0.5rem 0.75rem;
+}
+
+/* スマホ等画面では縦並び */
+@media (max-width: 700px) {
+    .item, .item:nth-child(even) {
+        flex-direction: column !important;
+        align-items: stretch;
+    }
+    /*--調べたコード　難しい--*/
+
+    .column { flex: 0 0 auto; }
+    .item img { height: 180px; }
+    .text { padding: 0.5rem 0; }
+}
+
+.links a {
+    display: block;
+
+    background: 
+    linear-gradient(#cccccc 1px, transparent 1px),
+    linear-gradient(90deg, #cccccc 1px, transparent 1px);
+  background-size: 20px 20px;
+    
+    color: #666;
+    text-decoration: underline dotted;
+    font-weight: 200;
+    padding: 0.75rem;
+    margin-left: 5rem;
+    margin-right: 5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.small{
+    width: 75%;
+    margin: 0 auto;
+}
+
+footer p {
+    color: #666;
+    font-size: 0.75rem;
+    font-weight: 200;
+}

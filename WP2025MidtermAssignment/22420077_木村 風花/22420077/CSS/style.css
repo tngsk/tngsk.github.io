@@ -1,0 +1,251 @@
+body{
+    min-height: 100vh;
+    width: auto;
+    padding: 10%;
+
+    /*　背景のグラデーション　*/
+    background-color: #e0f7fa;
+    background-image: 
+      /* 1つ目のバブル (大きめ、薄い青) */
+      radial-gradient(circle at 10% 20%, rgba(179, 229, 252, 0.7) 0%, rgba(179, 229, 252, 0) 70%),
+      /* 2つ目のバブル (中くらい、薄い紫) */
+      radial-gradient(circle at 70% 80%, rgba(224, 190, 255, 0.6) 0%, rgba(224, 190, 255, 0) 60%),
+      /* 3つ目のバブル (小さめ、薄い緑) */
+      radial-gradient(circle at 30% 60%, rgba(200, 230, 201, 0.8) 0%, rgba(200, 230, 201, 0) 50%),
+      /* 4つ目のバブル (大きめ、薄いピンク) */
+      radial-gradient(circle at 90% 30%, rgba(255, 205, 210, 0.5) 0%, rgba(255, 205, 210, 0) 75%);
+
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+header{
+    /*　ヘッダー全体を中央に配置し、中身を縦並びにする */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Home{ /* 画像を中央に置く　*/
+    margin-bottom: 0.5rem; /*　ホームアイコンの下に余白　*/
+}
+
+.icon{
+    width:  100px;
+    border-radius: 50%;
+    display: block;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    margin-bottom: 0.5rem; 
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sns{
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.sns a{
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.2); /*　アイコン裏に透明な白背景　*/
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.layout{
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.prof-text{
+    flex-grow: 1; 
+}
+
+.prof-image{
+    width: 150px;
+    flex-shrink: 0; /* 縮小させない！*/
+}
+
+.prof-img{
+    display: block;
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+
+.bubble{
+    display: flex;
+    justify-content: center;
+    gap: 2rem; /*　カード間のスペース　*/
+    margin-top: 50px;
+    position: relative;
+    
+    align-items: center;
+}
+
+.bubble-photo{
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.round-photo{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.bubble-text{
+    padding: 2rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+    text-align: center;
+}
+
+.bubble-text p {
+    margin-bottom: 1rem;
+    font-size: 0.8rem;
+}
+
+/* カードスタイル　*/
+.card{
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px); /*　ガラス越しぼかし　*/
+    border-radius: 12px; /*　角を丸くする */
+    padding: 1rem 2rem; /*　コンテンツと枠の余白　*/
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+
+    margin-top: 2rem;
+}
+
+.bubble-card{
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0,0.1);
+
+    width: 350px;
+    aspect-ratio: 1/1;
+    border-radius: 50%; /*　完全な円にする　*/
+    text-align: center;
+    overflow: hidden;
+
+    position: relative;
+
+    display: flex; 
+    justify-content: center; /* 水平方向の中央揃え */
+    align-items: center;     /* 垂直方向の中央揃え */
+}
+
+.bubble-card .sns{
+    width: 100%;
+}
+
+.skz-left{
+    transform: translateX(0px) translateY(100px) scale(1.8);
+}
+
+.skz-right{
+    transform: translateX(40px) translateY(200px) scale(1.2);
+}
+
+.hana-right{
+    transform: translateX(350px) translateY(300px) scale(1.8);
+}
+
+.hana-left{
+    transform: translateX(-350px) translateY(400px) scale(1.2);
+}
+
+/*　ギャラリー　*/
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.item{
+    flex: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.item img{
+    display: block;
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+/* リンク */
+.links a{
+    display: block;
+    color: #666;
+    text-decoration: none;
+    font-weight: 200;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+/* フォントスタイル */
+.small {
+    font-weight: 200;
+}
+
+footer p{
+    font-size: 0.75rem;
+    font-weight: 200;
+    text-align: center;
+}
+
+h2{
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+p{
+    font-size: 0.8rem;
+}
+
+/* 余白の設定 */
+.stack-large{
+    margin-top: 2rem;
+}
+
+.stack-small{
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.favotite-section{
+    margin-bottom: 500px;
+}
+

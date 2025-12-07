@@ -1,0 +1,197 @@
+/* ===================
+リセットCSS
+=================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* border: 1px solid #fefefe; */
+}
+
+body {
+  font-family: "M PLUS Rounded 1c", "Noto Sans JP", sans-serif;
+  min-height: 300vh;
+  background-color: rgba(249, 252, 195, 0.6); 
+  background-image:
+    repeating-linear-gradient(to right, rgba(113, 76, 6, 0.3) 0 1px, transparent 1px 20px),
+    repeating-linear-gradient(to bottom, rgba(113, 76, 6, 0.3) 0 1px, transparent 1px 20px);}
+
+/* --------- ヘッダー部分 --------- */
+header {
+  width: 100%;
+  padding: 1rem 0;
+  margin-bottom: 4rem;
+  background-color: #f6e8dae3;
+  backdrop-filter: blur(2px);
+  top: 0;
+  z-index: 100;
+}
+
+.header-top {
+  text-align: center;
+  margin-bottom: 0.5rem;
+ 
+}
+
+.header-top h3 {
+ font-size: 1.5rem;
+  color: #2c2c2c;
+}
+
+.header-nav ul {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.header-nav a {
+  text-decoration: none;
+  font-size: 1.1rem; 
+  font-weight: bold;
+  color: #3a3a3a;  
+  transition: 0.2s;
+}
+
+.header-nav a:hover {
+  color: #ff66aa;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+/* --------- プロフィール --------- */
+.profile-photo {
+  width: 300px;
+  height: 300px;
+  margin-top: 1rem;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  object-fit: cover;
+  object-position: 60% center;
+}
+
+.item {
+  text-align: center;
+  margin-bottom: 5rem;
+  
+}
+
+h3.name {
+  margin-top: 0.5rem;
+  font-size: 1.1rem; 
+  color: #2c2c2c;
+}
+
+.desc {
+  font-size: 0.8rem; 
+  color: #2c2c2c;  
+  margin-top: 0.5rem;
+}
+
+/* --------- 紹介セクション --------- */
+.door-section {
+  text-align: center;
+  margin-bottom: 6rem;
+}
+
+h2 {
+  font-size: 1.3rem; 
+  margin-top: 2rem;
+  margin-bottom: 0rem;
+  color: #2c2c2c;
+}
+
+ h3.koumoku {
+  font-size: 1.1rem; 
+  margin-bottom: 0.5rem;
+  color: #2c2c2c;
+}
+
+.door {
+  border-radius: 50% 50% 0 0; 
+  width: 400px;
+  height: 430px;
+  margin: 1.5rem auto;
+  padding: 1.5rem;
+  position: relative;
+  background-color: #d0eff7eb;
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.2),
+    0 0 0 14px rgba(255,255,255,0.8),
+    0 0 0 18px rgba(255,255,255,0.6),
+    0 0 0 22px rgba(255,255,255,0.4);
+}
+
+.door::after {
+  content: '';
+  position: absolute;
+  top: 55%;
+  left: 15px;
+  width: 20px;
+  height: 20px;
+  background: #fab0d5eb;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.door-desc {
+
+  font-size: 0.8rem;  
+  color: #3a3a3a;
+}
+
+/* 写真 */
+.asagi-image {
+  width: 70%;
+  height: auto;
+  margin: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  order: -1;
+}
+
+/* SNSアイコン */
+.sns-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.sns-icons img {
+  width: 25px;
+  height: auto;
+}
+
+/* マーケット*/
+.MARKET {
+  margin-top: 0.5rem;
+  font-size: 0.8rem; 
+  color: #f42905e7;
+}
+
+footer {
+  
+  margin-top: 4rem;
+  width: 100%;
+  padding: 0.7rem 0;
+  background-color: #f6e8da;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #2c2c2c;
+}
+
+footer a {
+  text-decoration: none;
+  color: #2c2c2c;
+  margin: 0 0.5rem;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}

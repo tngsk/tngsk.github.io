@@ -1,0 +1,97 @@
+body {
+  font-family: "Helvetica", "Hiragino Sans", "Noto Sans JP", sans-serif;
+  background-color: #f9f7f2; /* くすみオフホワイト */
+  color: #2e3b32; /* 深めのくすみ緑 */
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== ヘッダー ===== */
+header {
+  text-align: center;
+  padding: 50px 20px 30px;
+}
+
+h1 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  color: #2b3a33;
+}
+
+.catch {
+  color: #6d6a5d;
+  font-size: 0.95rem;
+}
+
+/* ===== カード ===== */
+.card {
+  background-color: #e6e2d4; /* くすみ黄土・ベージュ */
+  border-left: 8px solid #4a5f4c; /* 深緑 */
+  margin: 30px auto;
+  padding: 20px;
+  width: 90%;
+  max-width: 650px;
+  border-radius: 12px;  
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* バンド名 */
+.card h2 {
+  margin-top: 0;
+  font-size: 1.6rem;
+  color: #2e3b32;
+}
+
+/* バンド写真 */
+
+.band-photo {
+  width: 100%;
+  border-radius: 8px;
+  margin: 15px 0;
+  object-fit: cover;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08); /* lit.linkぽい影 */
+}
+
+/* 情報テキスト */
+.info p {
+  line-height: 1.6;
+  margin: 6px 0;
+}
+
+/* ===== links ===== */
+.links {
+  display: flex;
+  flex-direction: column; /* 縦並び */
+  gap: 12px; /* リンク同士の間隔 */
+  padding: 20px;
+  background-color: #f0ede0; /* 薄いベージュ */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.links a {
+  text-decoration: none;
+  color: #2e3b32;
+  font-weight: 600;
+  padding: 10px;
+  background-color: rgba(255,255,255,0.7);
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.links a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+
+
+
+footer {
+  text-align: center;
+  padding: 18px 12px;
+  color:#2e3b32;
+  font-size: 13px;
+  margin-top:30px;
+}

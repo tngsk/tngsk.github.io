@@ -1,0 +1,108 @@
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'M PLUS 1p','M PLUS Rounded 1c',sans-serif;
+    color:#000000c0;
+     /* border : 1px solid red;  */
+}
+
+body{
+    padding:2rem;
+    min-height:100vh;
+    background-size : cover;
+    background : linear-gradient(45deg,rgb(255, 255, 184),rgb(190, 217, 226),rgb(255, 218, 224));
+    display:flex;
+    flex-direction:column;
+    gap:2rem;
+}
+
+.flex-container{
+    display:flex;
+    gap:0.5rem;
+    margin-bottom:0.5rem;
+
+     justify-content: center; /* 水平方向の中央 */
+    align-items: center; /* 垂直方向の中央 */
+}
+
+ .container {
+    max-width: 1200px; /* 最大幅を制限 */
+    /* 水平方向の中央寄せ */
+    margin-right: auto;
+    margin-left: auto;
+    /* 左右の余白 */
+    padding-right: 3rem;
+    padding-left: 3rem;
+    text-align :center;
+ }
+
+.item{
+    flex:1;
+
+}
+
+main{
+    display:flex;
+    flex-direction:column;
+    gap:2rem;
+}
+
+.card{
+    background-color:rgba(255, 255, 255, 0.24);
+    border-radius:8px;
+    padding:1rem;
+    box-shadow:0 16px 32px rgba(0,0,0,0.1);
+    margin:1rem;
+}
+
+ .socials {
+    display: flex;
+    justify-content: center; /* 中央寄せ */
+    gap: 0.75rem; /* アイコン間の余白 */
+ }
+
+/* ソーシャルアイコンを大きくしてクリックしやすくする */
+.socials a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.5rem;
+    background: rgba(0, 0, 0, 0.04);
+    text-decoration: none;
+}
+
+.socials a i {
+    font-size: 1.75rem;
+    color: #000000c0;
+}
+
+.love_back {
+    background-color:pink;
+}
+
+.me_back {
+    background-color:lightblue;
+}
+
+.joy_back {
+    background-color:rgb(255, 255, 152);
+}
+
+#title{
+    background-color:rgba(255, 255, 255, 0.514);
+}
+
+h1 {
+    font-size:2.5rem;
+}
+
+h2 {
+    font-size:1.5rem;
+}
+
+p {
+    font-size:1rem;
+}

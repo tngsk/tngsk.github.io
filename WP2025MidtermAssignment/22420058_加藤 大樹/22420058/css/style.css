@@ -1,0 +1,121 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+
+}
+
+body{
+  font-family:"Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  
+}
+
+.container{
+  max-width: 480px;
+  margin-right:auto;
+  margin-left:auto;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  padding: 1rem ;
+  border-radius: 30px;
+
+  text-align: center;
+  background-color: rgb(227, 227, 227)
+}
+
+.card{
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2 10px rgba(0,0,0,0.1);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 5px solid rgb(0, 0, 0);
+}
+
+.stack{
+  display: flex;
+  flex-direction: column;
+}
+
+.stack>*+*{
+  margin-top: 1rem;
+}
+
+
+footer{
+  background-color: rgb(227, 227, 227);
+}
+
+body{
+  border: 5px solid rgb(0, 0, 0);
+}
+
+.Gamegallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.gallery-item {
+  text-align: center;
+}
+
+.gallery-item img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.caption {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.serifu {
+  writing-mode: vertical-rl;   
+  text-orientation: upright;   
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0 auto;            
+  padding: 1rem;
+  border: 3px solid #000;
+  background-color: #ffffff;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 20px;
+  line-height: 1.5;
+  display: block;
+}
+
+.serifu2 {
+  writing-mode: vertical-rl;   
+  text-orientation: upright;   
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0 auto;            
+  padding: 1.5rem;
+  border: 3px solid #000;
+  background-color: #ffffff;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 50%;
+}
+
+.card-hanbun{
+  display: flex;
+  align-items: center;
+  gap:0.5rem;
+}
+
+.gallery img{
+  width: 100%;      
+  height: auto;     
+  border-radius: 8px;
+}
+

@@ -1,0 +1,138 @@
+body{
+    padding: 1rem;
+    background-image: url('../img/dark-red.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.haikei-section{
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body{
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: italic;
+    color: #f7f7f7;
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+}
+
+h2{
+    display: flex;
+    justify-content: center;
+}
+
+h2 img{
+    width: 24px;
+    height: 24px;
+    margin-left: 0.5rem;
+    margin-top: 2px;
+}
+
+.daimei-row{
+    display: flex;
+    gap: 0;
+}
+
+.daimei{
+    flex: 1;
+    padding: 0.75rem 1rem;  
+    text-align: center;
+    white-space: nowrap;
+    border-right: 1px solid #f7f7f7;
+    text-decoration: none;
+    color: #f7f7f7;
+    font-size: 1.6rem;
+}
+
+.daimei:nth-child(3) {
+    border-right: none;
+}
+
+.music p {
+    background: rgba(255,255,255,0.5);     
+    padding: 1.5rem 2rem;      
+    border-radius: 12px;       
+    margin: 1rem 0;          
+    display: inline-block;
+    font-size: 1.5rem;    
+    display: flex;        
+    align-items: center;  
+    justify-content: space-between; 
+}
+
+.look-img{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.music p img{
+    width: 100px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.beauty-row{
+    display: flex;
+    gap: 1rem;
+}
+
+.beauty{
+    flex: 1;
+    padding: 0.75rem 1rem;
+    text-align: center;
+    margin-bottom: 1rem;    
+    background: rgba(255,255,255,0.8);
+    border-radius: 8px; 
+    justify-content: center;
+}
+
+.beauty img{
+    width: 150px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.book-row{
+    display: flex;
+    gap: 1rem;
+}
+
+.book{
+    flex: 1;
+    padding: 0.75rem 1rem;
+    text-align: center;    
+    background: rgba(255,255,255,0.8);
+    border-radius: 8px; 
+}
+
+.book img{
+    width: 150px;
+    aspect-ratio: 1 / 1.5;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+footer{
+    text-align: center;
+    color: #f7f7f7;
+}
+
+footer a{
+    color: #f7f7f7;
+    display: block;
+    margin-top: 0.5rem;
+}
+    

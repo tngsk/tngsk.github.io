@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+    /*枠線に見た目のサイズ感を合わせる */
+    box-sizing: border-box;
+}
+
+body {
+    padding: 1rem;
+    margin: 1rem;
+    min-height: 100vh;
+    /* 最小高さを画面の高さに設定 */
+    background-image: url(../img/haikei.jpg);
+
+    /* 背景画像にグラデーションを付ける  */
+    background: linear-gradient(to bottom, rgba(169, 169, 169, 0.532), rgba(0, 0, 0, 0.356)), url(../img/haikei.jpg);
+}
+
+main {
+    flex-direction: column;
+    display: flex;
+    gap: 2rem;
+    color: white;
+
+    font-family: "Zen Antique Soft", serif;
+}
+
+.taitle {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: white;
+    font-family: 'Great Vibes', cursive;
+}
+
+.card {
+    /* 角丸 */
+    border-radius: 1rem;
+    /* 影をつける（0.2が透明度） */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    background-color: gray;
+    /* 背景画像にグラデーションを付ける  */
+    background: linear-gradient(to bottom, rgba(225, 224, 224, 0.572), rgba(99, 99, 99, 0.753));
+}
+
+.sns-title {
+    width: 100%;            
+    text-align: center;     
+    color: white;
+    font-size: 1rem;
+    margin: 1rem 0 0.5rem;
+    letter-spacing: 2px;
+    opacity: 0.9;
+}
+
+.socials {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.socials a {
+    color: white;
+    font-size: 2rem;
+}
+
+.music a {
+    color: white;       
+}
+
+.artist {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.artist img{
+    width: 150px;
+}
+
+
+.artist-text {
+    color: white;
+}
+
+.song {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+
+    /* ウィンドウが狭い時に折り返す */
+    flex-wrap: wrap;
+}
+
+.song img {
+    width: 100%;        /* 画面幅に応じて縮む */
+    max-width: 300px;   /* 大きすぎないように上限を設定 */
+    height: auto;       /* 縦横比を保つ */
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.song-text {
+    flex: 1;
+    /* 残りの幅いっぱいを使う */
+    min-width: 200px;   /* 狭すぎる崩れ防止 */
+    color: white;
+}
+
+.song-text h1 {
+    margin-bottom: 0.5rem;
+}
+
+.song-text p {
+    line-height: 1.5;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 2rem;
+    color: white;
+    font-family: "Zen Antique Soft", serif;
+}
