@@ -1,0 +1,188 @@
+ * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box; 
+    }
+
+body {
+    background: linear-gradient(45deg, #FADAD6, #C9D9F8);
+    background-attachment: fixed;
+    color: #444;
+    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    line-height: 2.0;
+    padding: 1.5rem 1rem; 
+}
+
+/* コンテンツ全体の最大幅を制限 */
+.container {
+    max-width: 800px; 
+    margin: 0 auto;
+    padding: 1rem 0;
+}
+
+/* ヘッダー部分 */
+header {
+    text-align: center;
+    margin-bottom: 3rem; 
+    padding: 1rem;
+}
+
+.icon {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%; /* 円形 */
+    object-fit: cover;
+    border: 4px solid #D8BFD8; 
+    margin-bottom: 1rem;
+}
+
+h1 {
+    color: #444; 
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.catchphrase {
+    color: #777;
+    font-size: 1.1rem;
+}
+
+
+/* 関連リンク */
+
+    /* リンク全体 */
+    .link-list {
+        text-align: center;
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem; 
+        margin-bottom: 3.5rem;
+    }
+
+    /* 個々のリンクボタンの外観 */
+    .link-item a {
+        display: block; 
+        text-decoration: none;
+        color: #444;
+        background-color: rgba(142, 131, 143, 0.103);
+        border: 2px solid #D8BFD8; 
+        border-radius: 16px; 
+        padding: 1rem 1.5rem;
+        font-weight: 500;
+        box-shadow: 0 1px 3px rgba(33, 33, 33, 0.126); 
+    }
+
+    .link-item a:hover {
+        background-color: #dab7da;
+        color: white;
+        border-color: #D8BFD8;
+        transform: translateY(-3px);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.345);
+    }
+
+
+    /* フォトギャラリー */
+    .gallery-section {
+        padding: 1rem 0;
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    h2 {
+        color: #444;
+        margin-bottom: 1.5rem;
+        border-bottom: 2px solid #D8BFD8; 
+        display: inline-block;
+        padding-bottom: 0.3rem;
+        font-weight: 400;
+    }
+        
+    /* 場所ごとに縦に並べる */
+    .photo-grid {
+        display: flex;
+        flex-direction: column; 
+        gap: 2rem; /* グループ間の縦の隙間 */
+        justify-content: center;
+    }
+
+    /* 色付きボックス */
+    .photo-item {
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.162);
+        text-align: left;
+        padding: 0 2rem 1rem 2rem;
+    }
+
+    /* 場所ごとの背景色 */
+    .photo-item.Hokkaido { background-color: #bfe6ff; }
+    .photo-item.Akiu { background-color: #cfdcf8; }
+    .photo-item.live { background-color: #e3c9f9; }
+    .photo-item.MtKinka { background-color: #f1dfb9; }
+
+    /* 場所名とキャプション */
+    .photo-item figcaption {
+        padding: 1rem 0 0.5rem 0; 
+        font-size: 1.1rem; 
+        color: #444;
+        text-align: left;
+        font-weight: 500;
+    }
+
+    /* 2枚の画像の枠 */
+    .image-pair {
+        display: flex;
+        gap: 0.5rem; /* 画像間の隙間 */
+    }
+
+    /* 中の画像のサイズ設定 */
+    .image-pair img {
+        width: 50%;
+        height: 230px;
+        object-fit: cover;
+        display: block;
+        border-radius: 8px; 
+    }
+
+
+/* 外部リンク */
+    .external-links {
+        padding-bottom: 3rem;
+    }
+        
+    .external-links ul {
+        list-style: none;
+        padding: 0;
+        text-align: center;
+    }
+        
+    .external-links li {
+        margin-bottom: 0.8rem;
+    }
+        
+    .external-links a {
+        color: #444;
+        text-decoration: none;
+        font-size: 1.1rem;
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        border-bottom: 2px dashed #D8BFD8;
+    }
+
+    /* マウス反応でボックスの色変化 */
+    .external-links a:hover {
+        color: #dc69dc;
+        border-bottom: 2px solid #d48bd4;
+    }
+
+/* フッター */
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.8rem;
+    color: #999;
+    border-top: 1px solid #ddd;
+}

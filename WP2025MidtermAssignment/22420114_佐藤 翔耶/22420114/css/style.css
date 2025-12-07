@@ -1,0 +1,147 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    padding: 1rem;
+    min-height: 100vh; /* 最小高さを画面の高さに設定 */
+
+    background:linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); /* 背景色を設定 */
+}
+
+
+/* .sirivennela-regular {
+  font-family: "Sirivennela", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+} */
+
+/* .niconne-regular {
+  font-family: "Niconne", cursive;
+  font-weight: 400;
+  font-style: normal;
+} */
+
+
+/* .bodoni-moda-<uniquifier> {
+  font-family: "Bodoni Moda", serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+} */
+
+
+
+/* 色のバリエーション */
+:root{
+    --primary-color: #3498db;
+    --primary-light: #5dade2;
+    --primary-dark: #2980b9;
+    /* 透明度バリエーション */
+    --primary-10: rgba(52, 152, 219, 0.1);
+    --primary-20: rgba(52, 152, 219, 0.2);
+    --primary-30: rgba(52, 152, 219, 0.3);
+    --primary-40: rgba(52, 152, 219, 0.4);
+    --primary-50: rgba(52, 152, 219, 0.5);
+
+    --secondary-color: #2ecc71;
+    --background-color: #f8f9fa;
+    --text-color: #2c3e50;
+    --border-color: #e9ecef;
+}
+
+
+.container{
+    max-width: 1200px;
+
+    /* 水平方向の中央寄せ */
+    margin-right: auto;
+    margin-left: auto;
+
+    /* 左右の余白 */
+    padding-right: 1rem;
+    padding-left: 1rem;
+
+}
+
+.stack-gap{
+    display: flex;
+    flex-direction: column;                 /* 縦方向に積み重ねる */
+    gap: 1rem;                              /* アイテム間のスペースを設定 */
+    
+    font-family: "Niconne", cursive;
+    text-align: center;
+
+    background-color: var( --primary-40);
+    padding: 1rem;
+    border-radius: 16px;
+   }
+
+
+.card{
+    background: var(--primary-30);
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 16px;
+
+    display: flex;
+    gap: 2rem;
+}
+
+
+.flex-container{
+    display: flex;
+    gap: 1rem;                          /* アイテム間のスペースを設定 */
+
+    justify-content: center;            /* 水平方向の中央 */
+    align-items: center;                /* 垂直方向の中央 */
+}
+
+
+.socials{
+    display: flex;
+    justify-content: center;            /* 水平方向の中央 */
+    align-items: center;
+    gap: 0.8rem;                        /* アイコン間の余白 */
+}
+
+.panel{
+    display: flex;
+    gap: 1rem; 
+    /* align-items: flex-start; */
+    margin: 1rem;
+
+    flex-wrap: wrap;
+}
+
+
+.panel.reverse{
+    flex-direction: row-reverse; /* 左右反転 */
+}
+
+.image-block img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin-bottom: 1rem;
+    border-radius: 16px;
+}
+
+.text-block {
+    flex: 2;  /* ← 文章エリアを広げる */
+    color: var(--text-color);
+    font-size: 1.5rem;
+    font-family: "Bodoni Moda", serif;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 2rem;
+
+}
+
+.image-block {
+    flex: 1; /* ← 画像エリアも同じ幅で */
+}

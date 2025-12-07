@@ -1,0 +1,215 @@
+/*=====================================
+  基本設定と中央寄せレイアウト
+=======================================*/
+body {
+    font-family: 'Times New Roman', Times, serif, cursive;
+    color: #f3eeee;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+
+    position: relative;
+    background-color: #f7f7f7;
+}
+
+/* 半透明な画像 */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    /* 愛犬の背景画像 */
+    background-image: url('../img/dog-background.jpg');
+    background-size: cover;
+    background-position: center;
+
+    opacity: 0.5;
+    z-index: -1;
+}
+
+main {
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 30px 0;
+}
+
+/* カードセクションのスタイル*/
+.card-section {
+    /* メインコンテンツのカード背景色*/
+    background-color: #6f6f6c;
+    margin-bottom: 30px;
+    padding: 30px 25px;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+/*  一番上のカード*/
+.profile-header {
+    background: url('../img/header-card-bg.jpg') center / cover;
+}
+
+
+/* 見出しのスタイル  */
+.decorative-heading {
+    /* 文字色*/
+    color: #ffffff;
+    font-weight: 700;
+    margin-bottom: 25px;
+
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/*=====================================
+  プロフィール
+=======================================*/
+
+.main-photo {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+
+    border: 2px solid #a5a2a2;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 15px;
+
+    background-image: none;
+}
+
+
+.catchphrase {
+    color: #ffffff;
+    font-size: 1.0em;
+    line-height: 1.5;
+    margin: 5px 0;
+}
+
+/*SNSアイコン */
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #000000;
+    color: #fff;
+    font-size: 0.8em;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+/*=====================================
+  フォトギャラリー 
+=======================================*/
+.photo-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.gallery-item {
+    width: calc(33.33% - 10px);
+    height: 100px;
+    object-fit: cover;
+
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/*=====================================
+  プロフィール詳細セクション
+=======================================*/
+.profile-details {
+    text-align: center;
+}
+
+.profile-card {
+    background-color: #c8c8c8;
+    padding: 20px;
+    margin-top: 15px;
+    border-radius: 10px;
+    box-shadow: none;
+}
+
+.profile-card h3 {
+    color: #000000;
+    border-bottom: 1px dashed #000000;
+    padding-bottom: 5px;
+    margin-top: 10px;
+    font-size: 1em;
+}
+
+.detail-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 5px;
+}
+
+.detail-list li {
+    color: #343434;
+    padding: 5px 0;
+}
+
+/*=====================================
+  メインリンクセクション
+=======================================*/
+.main-links {
+    margin-top: 30px;
+}
+
+.main-links nav {
+    padding-top: 10px;
+}
+
+.main-links .link-button {
+    display: block;
+    width: 90%;
+    margin: 10px auto;
+    padding: 12px 20px;
+    text-decoration: none;
+    font-weight: 600;
+    color: #333;
+    background-color: #e0f2f1;
+
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.main-links .link-button:hover {
+    background-color: #b2dfdb;
+}
+
+/*=====================================
+  フッター
+=======================================*/
+footer {
+    padding: 15px;
+    font-size: 0.75em;
+
+    background-color: #6f6f6c;
+
+    color: #f3eeee;
+
+    max-width: 450px;
+    margin: 0 auto;
+
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}

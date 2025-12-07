@@ -1,0 +1,153 @@
+/* -------------------------------------- */
+/* ボックスモデルの要素を意識した設計 */
+/* -------------------------------------- */
+
+/* 全体設定: box-sizingをborder-boxに設定し、paddingやborderがwidth/heightに加算されないようにする */
+* {
+    box-sizing: border-box; 
+}
+
+body {
+    font-family: 'Avenir', 'Helvetica Neue', Arial, sans-serif;
+    background-color: #e6e6fa; /* 背景色: ラベンダー */
+    color: #333;
+    display: flex;
+    flex-direction: column; /* 縦並びにする */
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    /* paddingで上下に余白を持たせる */
+    padding: 30px 10px; 
+}
+
+/* 課題提出用タイトルエリア */
+.task-title-area {
+    width: 100%;
+    max-width: 600px;
+    background-color: #fffacd; /* 薄い黄色 */
+    /* paddingで内側の余白を設定 */
+    padding: 10px; 
+    /* margin-bottomで下に外側の余白を設定 */
+    margin-bottom: 20px; 
+    border: 2px solid #ffd700;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+}
+.task-title-area p {
+    margin: 0; /* p要素のデフォルトmarginをリセット */
+}
+
+
+/* コンテンツの全体を囲むコンテナ */
+.container {
+    width: 100%;
+    max-width: 600px;
+    /* paddingで内側の余白をしっかり確保 */
+    padding: 30px; 
+    text-align: center;
+    background-color: #ffffff; /* 白い背景 */
+    border-radius: 15px;
+    /* borderで薄い枠線を定義 */
+    border: 1px solid #ddd; 
+    /* 影を付けて立体感を出す */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); 
+}
+
+/* ヘッダー（プロフィール部分） */
+header {
+    /* 下に外側の余白を設定 */
+    margin-bottom: 30px; 
+    /* 区切り線としてborder-bottomを使用 */
+    border-bottom: 2px solid #f0f0f5; 
+    /* paddingで区切り線の上に余白を持たせる */
+    padding-bottom: 20px; 
+}
+
+.profile-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; 
+    object-fit: cover;
+    /* margin-bottomで下に余白 */
+    margin-bottom: 10px; 
+    /* borderで強調的な縁取り */
+    border: 5px solid #8a2be2; /* 青紫色 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.catchphrase {
+    /* 上下のmarginでh1との距離を調整 */
+    margin: 5px 0 0 0; 
+    color: #6a5acd; /* スレートブルー */
+}
+
+/* リンクボタンセクション */
+.links-section {
+    display: flex;
+    flex-direction: column; 
+    gap: 15px; /* リンク間のスペース */
+    /* 下に外側の余白を設定 */
+    margin-bottom: 30px;
+}
+
+/* 個々のリンクボタン */
+.link-button {
+    display: block;
+    /* paddingで内側の余白（クリック領域）を確保 */
+    padding: 18px 25px; 
+    text-decoration: none;
+    color: #fff; 
+    background-color: #8a2be2; 
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    /* borderで枠線を定義 */
+    border: 3px solid transparent; 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* マウスオーバー時のエフェクト */
+.link-button:hover {
+    background-color: #6a5acd;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    /* borderの色を変更して強調（ボックスモデルの応用） */
+    border: 3px solid #ffd700; 
+}
+
+.icon {
+    margin-right: 10px;
+}
+
+/* カスタムカラー */
+.html-link { background-color: #ff5722; } /* オレンジ */
+.css-link { background-color: #2979ff; } /* 青 */
+.essay-link { background-color: #00bfa5; } /* シアン */
+
+/* フッター */
+.footer-box {
+    /* paddingで内側の余白 */
+    padding: 10px 0; 
+    /* border-topで上部に区切り線 */
+    border-top: 1px dashed #ccc; 
+}
+footer p {
+    font-size: 0.8em;
+    color: #999;
+    /* p要素のデフォルトmarginをリセット */
+    margin: 5px 0; 
+}
+
+/* スマートフォンでの表示調整 */
+@media (max-width: 480px) {
+    .container {
+        padding: 20px;
+    }
+    .link-button {
+        font-size: 1.0em;
+        padding: 15px 20px;
+    }

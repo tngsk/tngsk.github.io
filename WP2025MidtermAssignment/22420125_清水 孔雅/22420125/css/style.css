@@ -1,0 +1,189 @@
+/* --- ベーススタイル --- */
+body {
+    font-family: 'Arial', sans-serif; /* フォントを一般的なものに設定 */
+    background-color: #f8f8f8; /* 背景色 */
+    color: #333;
+    line-height: 1.6;
+    margin: 0; /* bodyのデフォルトマージンをリセット */
+    padding: 20px;
+}
+
+main {
+    max-width: 960px; /* コンテンツの最大幅 */
+    margin: 0 auto; /* 中央寄せ */
+    padding: 0 15px; /* 左右の余白 */
+}
+
+h1 {
+    font-family: 'Sacramento', cursive; /* Sacramentoフォント適用 */
+    font-size: 3rem;
+    margin: 0;
+    color: #2c3e50; /* 少し濃い色 */
+}
+
+h2 {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+h3 {
+    font-size: 1.25rem;
+    color: #34495e;
+    margin-bottom: 0.5rem;
+}
+
+h4 {
+    font-size: 1.1rem;
+    color: #34495e;
+}
+
+/* --- ヘッダー --- */
+header {
+    text-align: center;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+    background-color: #ffffff;
+    border-bottom: 1px solid #eee;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+header .subhead {
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+    color: #7f8c8d;
+}
+
+/* --- メイン画像 --- */
+.main-image {
+    width: 100%;
+    max-height: 420px;
+    display: block;
+    border-radius: 16px;
+    object-fit: cover; /* 画像が要素に収まるようにトリミング */
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+/* --- カード共通スタイル --- */
+.card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    margin-bottom: 2rem; /* カード間の下マージン */
+}
+
+/* --- 横並びレイアウト (Flexboxコンテナ) --- */
+.yoko-layout {
+    display: flex; /* ★これによって子要素が横並びになります */
+    gap: 1.5rem; /* 子要素間の隙間 */
+    flex-wrap: wrap; /* 画面幅が狭いときに子要素を折り返す */
+}
+
+/* --- 各アイテム (Flexboxアイテム) --- */
+.item {
+    flex: 1 1 200px; /* 最小幅200pxで、柔軟にサイズを調整 */
+    min-width: 160px; /* 最小幅 */
+}
+
+/* --- メンバー情報 --- */
+.members .member h4 {
+    margin-bottom: 0.25rem;
+}
+
+/* --- おすすめ曲 --- */
+.song {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.song:first-of-type { /* 最初のおすすめ曲の上の線は不要 */
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+}
+
+.song p {
+    margin-bottom: 0.5rem;
+}
+
+.song a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+.song a:hover {
+    text-decoration: underline;
+}
+
+/* --- stack-small (縦方向のFlex) --- */
+.stack-small { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 0.5rem; /* 縦方向の隙間 */
+}
+
+/* --- レスポンシブ対応 --- */
+@media (max-width: 768px) { /* タブレット向け調整 */
+    h1 {
+        font-size: 2.5rem;
+    }
+    h2 {
+        font-size: 1.6rem;
+    }
+    .main-image {
+        max-height: 320px;
+        margin-top: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    .card {
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    .yoko-layout {
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 600px) { /* スマートフォン向け調整 */
+    body {
+        padding: 10px;
+    }
+    h1 {
+        font-size: 2rem;
+    }
+    h2 {
+        font-size: 1.4rem;
+    }
+    .main-image {
+        max-height: 250px;
+    }
+    /* 横並びのカードを縦並びにする */
+    .yoko-layout { 
+        flex-direction: column; 
+        gap: 0; /* 縦並びになったのでギャップをリセット */
+    }
+    /* 縦並びになったアイテムに区切り線を追加 */
+    .yoko-layout .item {
+        padding: 1rem 0;
+        border-bottom: 1px dashed #eee;
+        min-width: unset; /* 最小幅をリセット */
+        flex: auto; /* サイズを自動調整 */
+    }
+    .yoko-layout .item:last-child {
+        border-bottom: none; /* 最後のアイテムの下線は不要 */
+    }
+}
+
+/* Sacramentoフォントの適用 */
+.sacramento-regular {
+    font-family: "Sacramento", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
