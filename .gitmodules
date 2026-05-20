@@ -1,0 +1,3 @@
+[submodule "MP-5"]
+	path = MP-5
+	url = https://github.com/tngsk/MP-5.git
